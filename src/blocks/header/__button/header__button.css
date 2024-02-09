@@ -1,0 +1,10 @@
+.header__button {
+  display: flex;
+  color: #000;
+  align-items: center;
+  justify-content: center;
+  background-color: #3ddc84;
+  height: 32px;
+  width: 76px;
+  border-radius: 3px;
+}
