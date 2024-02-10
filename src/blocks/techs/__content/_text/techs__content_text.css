@@ -1,0 +1,13 @@
+.techs__content_text {
+  margin: 0;
+  margin: 26px 0 100px 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 143%;
+  letter-spacing: -0.04em;
+  color: #fff;
+  max-width: 460px;
+  text-align: center;
+}
