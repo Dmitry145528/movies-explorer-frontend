@@ -1,7 +1,15 @@
 function Footer() {
   return (
-    <>
-    </>
+    <section className="footer">
+      <p className="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+      <aside className="footer__content">
+        <p className="footer__content_date">&copy; {new Date().getFullYear()}</p>
+        <ul className="footer__list">
+          <li><a href="" className="footer__list_link">Яндекс.Практикум</a></li>
+          <li><a href="" className="footer__list_link">Github</a></li>
+        </ul>
+      </aside>
+    </section>
   )
 }
 
