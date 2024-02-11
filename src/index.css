@@ -34,3 +34,7 @@
       @import url('./blocks/about-me/__description/_text/about-me__description_text.css');
       @import url('./blocks/about-me/__description/_link/about-me__description_link.css');
     @import url('./blocks/about-me/__photo/about-me__photo.css');
+@import url('./blocks/portfolio/portfolio.css');
+  @import url('./blocks/portfolio/__title/portfolio__title.css');
+  @import url('./blocks/portfolio/__list/portfolio__list.css');
+    @import url('./blocks/portfolio/__list/_link/portfolio__list_link.css');
