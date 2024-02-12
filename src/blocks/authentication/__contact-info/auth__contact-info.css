@@ -1,0 +1,9 @@
+.auth__contact-info {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 0;
+  border: none;
+  margin: 40px 0 83px 0;
+  row-gap: 24px;
+}

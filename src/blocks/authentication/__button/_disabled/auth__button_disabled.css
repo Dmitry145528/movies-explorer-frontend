@@ -1,0 +1,5 @@
+.auth__button_disabled {
+    background-color: #F8F8F8;
+    color: #c2c2c2;
+    cursor: default;
+}
