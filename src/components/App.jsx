@@ -11,18 +11,23 @@ function App() {
 
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location.pathname]);
 
+  // const handleLogin = () => {
+  //   setLoggedIn(true);
+  // }
+
   return (
     <div className="center-pos">
-      {currentPath === '/' && <Header />}
+      {currentPath === '/' && <Header login={loggedIn} />}
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="signin" element={<Login/>} />
+        <Route path="signin" element={<Login />} />
         <Route path="signup" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
