@@ -2,4 +2,6 @@
   display: flex;
   flex-direction: column;
   background-color: #073042;
+  margin-top: -74px;
+  padding-top: 74px
 }

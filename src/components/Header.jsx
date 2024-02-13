@@ -1,8 +1,16 @@
-import { Link } from 'react-router-dom'
-// import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react';
 import Logo from '../images/logo.svg'
 
 function Header({ login }) {
+
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState(location.pathname);
+
+  useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location.pathname]);
+
   return (
     <>
       <header className={login ? "header header_auth" : "header"}>
@@ -15,7 +23,7 @@ function Header({ login }) {
               <li><Link className='header__link header__link_auth' to="/movies">Фильмы</Link></li>
               <li><Link className='header__link header__link_auth' to="/saved-movies">Сохранённые фильмы</Link></li>
             </ul>
-            <Link className='header__link_img' to="/profile"></Link>
+            <Link className={currentPath === '/' ? 'header__link_img' : 'header__link_img header__link_img_dark'} to="/profile"></Link>
           </div>
         ) : (
           <ul className='header__list'>
