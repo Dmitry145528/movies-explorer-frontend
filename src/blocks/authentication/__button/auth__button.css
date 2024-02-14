@@ -1,8 +1,7 @@
 .auth__button {
   width: 100%;
-  max-width: 358px;
   background-color: #4285F4;
-  margin: 69px 0 16px 0;
+  margin: 0;
   padding: 14px 0;
   border: none;
   border-radius: 3px;

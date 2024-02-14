@@ -19,7 +19,7 @@ function App() {
   }, [location.pathname]);
 
   // const handleLogin = () => {
-  //   setLoggedIn(true);
+  //   setLoggedIn(!loggedIn);
   // }
 
   return (

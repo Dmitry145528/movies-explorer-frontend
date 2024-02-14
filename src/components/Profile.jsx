@@ -4,19 +4,16 @@ import { useFormAndValidation } from "../hooks/useFormAndValidation"
 
 function Profile() {
 
-  const { values, handleChange, errors } = useFormAndValidation();
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
   const [isEditing, setIsEditing] = useState(false);
-  console.log(isEditing);
 
   const handleEditClick = () => {
     setIsEditing(true);
-    console.log(isEditing);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    console.log("Отправка данных на сервер:", values);
   }
 
   return (
@@ -44,7 +41,7 @@ function Profile() {
           <span className="profile__contact-info_line"></span>
           <div className="auth__field profile__field">
             <label htmlFor="email" className="auth__label profile__label">
-              Почта
+              Email
             </label>
             <input
               id="email"
@@ -60,16 +57,14 @@ function Profile() {
           </div>
         </fieldset>
         {isEditing ? (
-          <button type="button" onClick={handleSubmit} className="profile__button" aria-label={`Кнопка с надписью сохранить`}>
-            {'Сохранить'}
-          </button>
+          <button type="button" className={`auth__button ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью Сохранить`} onClick={handleSubmit} disabled={!isValid}>{'Сохранить'}</button>
         ) : (
           <button type="button" className="profile__button" onClick={handleEditClick} aria-label={`Кнопка с надписью редактировать`}>
             {'Редактировать'}
           </button>
         )}
       </form>
-      <Link className="auth__caption-link profile__caption-link" to='/signout'>{"Выйти из аккаунта"}</Link>
+      {!isEditing ? (<Link className="auth__caption-link profile__caption-link" to='/signout'>{"Выйти из аккаунта"}</Link>) : ('')}
     </main >
   )
 }
