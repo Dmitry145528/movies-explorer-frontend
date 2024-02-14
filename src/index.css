@@ -68,3 +68,11 @@
   @import url('./blocks/not-found/__title/not-found__title.css');
   @import url('./blocks/not-found/__text/not-found__text.css');
   @import url('./blocks/not-found/__link/not-found__link.css');
+@import url('./blocks/profile/profile.css');
+  @import url('./blocks/profile/__contact-info/profile__contact-info.css');
+    @import url('./blocks/profile/__field/profile__field.css');
+    @import url('./blocks/profile/__contact-info/_line/profile__contact-info_line.css');
+      @import url('./blocks/profile/__label/profile__label.css');
+      @import url('./blocks/profile/__input/profile__input.css');
+    @import url('./blocks/profile/__button/profile__button.css');
+  @import url('./blocks/profile/__caption-link/profile__caption-link.css');

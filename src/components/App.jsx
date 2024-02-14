@@ -34,7 +34,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {(currentPath === '/' || currentPath === '/profile' || currentPath === '/movies' || currentPath === '/saved-movies') && <Footer />}
+      {(currentPath === '/' || currentPath === '/movies' || currentPath === '/saved-movies') && <Footer />}
     </div>
   );
 }
