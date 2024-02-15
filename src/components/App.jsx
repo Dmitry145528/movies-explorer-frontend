@@ -2,8 +2,9 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import Header from "./Header";
 import Main from "./Main";
-import Login from './Login';
 import Register from './Register';
+import Login from './Login';
+import Movies from './Movies';
 import Profile from './Profile';
 import Footer from "./Footer";
 import NotFound from './NotFound';
@@ -28,8 +29,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="signin" element={<Login />} />
         <Route path="signup" element={<Register />} />
+        <Route path="signin" element={<Login />} />
+        <Route path="movies" element={<Movies />} />
         <Route path="profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
