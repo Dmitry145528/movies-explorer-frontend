@@ -14,15 +14,15 @@ function App() {
 
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location.pathname]);
 
-  // const handleLogin = () => {
-  //   setLoggedIn(!loggedIn);
-  // }
+  const handleLogin = () => {
+    setLoggedIn(!loggedIn);
+  }
 
   return (
     <div className="center-pos">
@@ -31,10 +31,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="signup" element={<Register />} />
-        <Route path="signin" element={<Login />} />
+        <Route path="signin" element={<Login handleLogin={handleLogin} />} />
         <Route path="movies" element={<Movies />} />
         <Route path="saved-movies" element={<SavedMovies />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<Profile handleLogin={handleLogin} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 

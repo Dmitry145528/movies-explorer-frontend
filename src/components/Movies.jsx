@@ -1,79 +1,48 @@
 import SearchForm from './SearchForm'
 import MoviesCardList from './MoviesCardList'
 import MoviesCard from './MoviesCard'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Movies() {
+  const [movies, setMovies] = useState([]);
+  const [visibleMovies, setVisibleMovies] = useState(16); // Начальное количество отображаемых карточек
 
-  const [movies, setMovies] = useState([{
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }, {
-    "_id": "65b28d0878a312c737b367e5",
-    "name": "Круг 2",
-    "duration": "1ч42м",
-    "image": "https://steamuserimages-a.akamaihd.net/ugc/1280660303510875511/48B4EDCB3E63D28A53516A1C674F98B543F541FB/?imw=512&amp;imh=384&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true"
-  }]);
+  useEffect(() => {
+    const fetchMoviesData = async () => {
+      try {
+        const response = await fetch('./src/utils/moviesData.json');
+        const data = await response.json();
+        setMovies(data);
+      } catch (error) {
+        console.error('Ошибка при загрузке данных:', error);
+      }
+    };
+
+    fetchMoviesData();
+  }, []);
+
+  const handleShowMore = () => {
+    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 16); // Увеличиваем количество отображаемых карточек на 16
+  };
 
   return (
-    <main>
+    <main className='content'>
       <SearchForm />
       <MoviesCardList
-        movieItems={movies.map(movie => (
+        movieItems={movies.slice(0, visibleMovies).map(movie => (
           <MoviesCard
             key={movie._id}
             movie={movie}
           />
-        ))} />
-    </main >
-  )
+        ))}
+      />
+      {visibleMovies < movies.length && (
+        <button className="elements__button" onClick={handleShowMore}>
+          Ещё
+        </button>
+      )}
+    </main>
+  );
 }
 
-export default Movies
+export default Movies;

@@ -1,9 +1,13 @@
 import AuthForm from "./AuthForm"
+import { useNavigate } from "react-router-dom"
 
-function Login() {
+function Login(props) {
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    props.handleLogin();
+    navigate('/', { replace: true });
   }
 
   return (

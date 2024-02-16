@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 
-function Profile() {
+function Profile(props) {
+
+  const navigate = useNavigate();
 
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const [isEditing, setIsEditing] = useState(false);
@@ -11,8 +13,12 @@ function Profile() {
     setIsEditing(true);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleExitClick = () => {
+    props.handleLogin();
+    navigate('/', { replace: true });
+  };
+
+  const handleSubmit = () => {
     setIsEditing(false);
   }
 
@@ -64,7 +70,7 @@ function Profile() {
           </button>
         )}
       </form>
-      {!isEditing ? (<Link className="auth__caption-link profile__caption-link" to='/signout'>{"Выйти из аккаунта"}</Link>) : ('')}
+      {!isEditing ? (<button className="auth__caption-link profile__caption-link" onClick={handleExitClick} to='/signout'>{"Выйти из аккаунта"}</button>) : ('')}
     </main >
   )
 }

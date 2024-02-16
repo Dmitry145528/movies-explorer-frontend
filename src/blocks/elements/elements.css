@@ -1,4 +1,6 @@
 .elements {
+  display: flex;
+  flex-direction: column;
   max-width: 1140px;
-  margin: 70px 70px 0;
+  margin: 80px auto 0;
 }

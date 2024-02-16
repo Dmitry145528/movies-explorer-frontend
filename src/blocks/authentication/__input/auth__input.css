@@ -11,3 +11,7 @@
   color: #fff;
   background-color: transparent;
 }
+
+.auth__input:focus:valid {
+  border-color: #4285F4;
+}
