@@ -5,6 +5,7 @@ import Main from "./Main";
 import Register from './Register';
 import Login from './Login';
 import Movies from './Movies';
+import SavedMovies from './SavedMovies';
 import Profile from './Profile';
 import Footer from "./Footer";
 import NotFound from './NotFound';
@@ -32,6 +33,7 @@ function App() {
         <Route path="signup" element={<Register />} />
         <Route path="signin" element={<Login />} />
         <Route path="movies" element={<Movies />} />
+        <Route path="saved-movies" element={<SavedMovies />} />
         <Route path="profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

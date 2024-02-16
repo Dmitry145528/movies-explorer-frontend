@@ -1,0 +1,14 @@
+.element__heart_active {
+  padding: 0;
+  min-width: 24px;
+  min-height: 24px;
+  background: url(../../../../images/heart-active.svg) no-repeat;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.element__heart_active:hover {
+  opacity: 0.7;
+}

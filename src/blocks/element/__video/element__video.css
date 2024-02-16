@@ -1,0 +1,6 @@
+.element__video {
+  width: 100%;
+  height: 151px;
+  border: none;
+  object-fit: cover;
+}

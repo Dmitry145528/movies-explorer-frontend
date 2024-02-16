@@ -11,8 +11,8 @@
   width: 36px;
   height: 20px;
   position: relative;
-  transition: background 0.25s;
 }
+
 .search__toggle_switch:before,
 .search__toggle_switch:after {
   content: "";

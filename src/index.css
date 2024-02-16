@@ -87,5 +87,14 @@
       @import url('./blocks/search/__button/search__button.css');
     @import url('./blocks/search/__line/search__line.css');
     @import url('./blocks/search/__toggle/search__toggle.css');
-      
-  
+@import url('./blocks/elements/elements.css');
+  @import url('./blocks/elements/__grid-items/elements__grid-items.css');
+
+
+@import url('./blocks/element/element.css');
+  @import url('./blocks/element/__video/element__video.css');
+  @import url('./blocks/element/__pos-element/element__pos-element.css');
+    @import url('./blocks/element/__title/element__title.css');
+    @import url('./blocks/element/__heart/element__heart.css');
+      @import url('./blocks/element/__heart/_active/element__heart.css');
+    @import url('./blocks/element/__duration/element__duration.css');
