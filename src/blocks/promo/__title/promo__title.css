@@ -10,3 +10,10 @@
   letter-spacing: -0.04em;
   color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .promo__title {
+    margin: 300px auto 0;
+    text-align: center;
+  }
+}

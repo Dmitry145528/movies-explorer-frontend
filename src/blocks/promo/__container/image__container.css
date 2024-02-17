@@ -1,0 +1,12 @@
+.image__container {
+  display: flex;
+  justify-content: end;
+  margin: 102px 70px 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .image__container {
+    justify-content: center;
+    margin: 140px auto 70px;
+  }
+}

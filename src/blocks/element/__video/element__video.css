@@ -4,3 +4,9 @@
   border: none;
   object-fit: cover;
 }
+
+@media screen and (max-width: 768px) {
+  .element__video {
+    height: 190px;
+  }
+}

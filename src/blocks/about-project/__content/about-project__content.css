@@ -6,3 +6,10 @@
   grid-template-columns: minmax(284px, max-content) minmax(284px, max-content);
   gap: 26px 40px;
 }
+
+@media screen and (max-width: 768px) {
+  .about-project__content {
+    margin: 70px 0 93px 0;
+    gap: 22px 30px;
+  }
+}

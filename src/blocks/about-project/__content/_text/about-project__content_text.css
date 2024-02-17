@@ -7,3 +7,10 @@
   line-height: 143%;
   color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .about-project__content_text {
+    font-size: 12px;
+    line-height: 150%;
+  }
+}

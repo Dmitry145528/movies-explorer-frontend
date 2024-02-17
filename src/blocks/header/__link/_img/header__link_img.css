@@ -1,13 +1,15 @@
 .header__link_img {
   width: 100px;
   height: 32px;
-  background-image: url('../../../../images/profile.svg');
+  background-image: url("../../../../images/profile.svg");
   background-position: 50% 40%;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
   border-radius: 18px;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.header__link_img:hover {
-  opacity: 0.7;
+@media screen and (min-width: 930px) {
+  .header__link_img:hover {
+    opacity: 0.7;
+  }
 }

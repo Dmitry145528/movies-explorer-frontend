@@ -5,9 +5,11 @@
   font-style: normal;
   font-weight: 400;
   color: #fff;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.footer__list_link:hover {
-  opacity: 0.7;
+@media screen and (min-width: 930px) {
+  .footer__list_link:hover {
+    opacity: 0.7;
+  }
 }

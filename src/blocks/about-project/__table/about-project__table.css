@@ -4,3 +4,9 @@
   grid-template-columns: minmax(100px, 228px) minmax(184px, 912px);
   row-gap: 14px;
 }
+
+@media screen and (max-width: 768px) {
+  .about-project__table {
+    grid-template-columns: minmax(100px, 140px) minmax(184px, 912px);
+  }
+}

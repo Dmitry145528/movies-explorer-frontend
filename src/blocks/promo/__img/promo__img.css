@@ -1,5 +1,13 @@
 .promo__img {
   max-width: 722px;
   max-height: 244px;
-  margin: 102px 70px 60px 488px;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .promo__img {
+    max-width: 680px;
+    max-height: 230px;
+    width: 100%;
+  }
 }

@@ -8,9 +8,11 @@
   color: #fff;
   background-color: transparent;
   cursor: pointer;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.profile__button:hover {
-  opacity: 0.7;
+@media screen and (min-width: 930px) {
+  .profile__button:hover {
+    opacity: 0.7;
+  }
 }

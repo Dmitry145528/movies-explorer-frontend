@@ -7,3 +7,11 @@
   line-height: 111%;
   color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .about-me__description_subtitle {
+    font-size: 12px;
+    line-height: 150%;
+    margin: 16px 0 20px 0;
+  }
+}

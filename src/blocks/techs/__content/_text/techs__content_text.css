@@ -11,3 +11,11 @@
   max-width: 460px;
   text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+  .techs__content_text {
+    margin: 22px 0 83px 0;
+    font-size: 12px;
+    line-height: 150%;
+  }
+}

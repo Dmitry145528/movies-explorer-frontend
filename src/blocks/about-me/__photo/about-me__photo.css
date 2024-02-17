@@ -3,3 +3,10 @@
   max-height: 327px;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 768px) {
+  .about-me__photo {
+    max-width: 255px;
+    max-height: 307px;
+  }
+}

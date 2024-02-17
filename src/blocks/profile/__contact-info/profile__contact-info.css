@@ -2,3 +2,9 @@
   margin: 123px 0 220px 0;
   row-gap: 0;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__contact-info {
+    margin: 96px 0 210px 0;
+  }
+}

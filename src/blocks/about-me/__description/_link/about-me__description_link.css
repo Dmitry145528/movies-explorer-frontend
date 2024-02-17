@@ -8,6 +8,8 @@
   transition: opacity .3s ease-in-out;
 }
 
-.about-me__description_link:hover {
-  opacity: 0.7;
+@media screen and (min-width: 930px) {
+  .about-me__description_link:hover {
+    opacity: 0.7;
+  }
 }

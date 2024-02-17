@@ -8,3 +8,10 @@
   letter-spacing: -0.04em;
   color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .about-me__description_title {
+    font-size: 40px;
+    line-height: 100%;
+  }
+}

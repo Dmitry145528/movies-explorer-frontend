@@ -13,9 +13,19 @@
   border-radius: 10px;
   width: 90px;
   height: 60px;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.techs__list_link:hover {
-  opacity: 0.7;
+@media screen and (min-width: 930px) {
+  .techs__list_link:hover {
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .techs__list_link {
+    font-size: 12px;
+    width: 84px;
+    height: 57px;
+  }
 }

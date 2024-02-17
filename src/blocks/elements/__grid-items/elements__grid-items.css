@@ -7,3 +7,9 @@
   list-style-type: none;
   line-height: 0;
 }
+
+@media screen and (max-width: 768px) {
+  .elements__grid-items {
+    gap: 30px 30px;
+  }
+}

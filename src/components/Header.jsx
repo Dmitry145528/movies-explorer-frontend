@@ -13,7 +13,7 @@ function Header({ login }) {
 
   return (
     <>
-      <header className={login ? "header header_auth" : "header"}>
+      <header className="header">
         <Link className="header__logo" to="/">
           <img src={Logo} alt="Логотип в виде улыбающегося смайлика" />
         </Link>
