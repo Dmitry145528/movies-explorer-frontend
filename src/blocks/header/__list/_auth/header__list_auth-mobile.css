@@ -1,0 +1,5 @@
+.header__list_auth-mobile {
+  flex-direction: column;
+  row-gap: 28px;
+  margin: 159px auto 0;
+}

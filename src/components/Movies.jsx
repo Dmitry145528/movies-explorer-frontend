@@ -4,6 +4,7 @@ import MoviesCard from './MoviesCard'
 import { useState, useEffect } from 'react'
 
 function Movies() {
+
   const [movies, setMovies] = useState([]);
   const [visibleMovies, setVisibleMovies] = useState(16); // Начальное количество отображаемых карточек
 
@@ -22,7 +23,7 @@ function Movies() {
   }, []);
 
   const handleShowMore = () => {
-    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 16); // Увеличиваем количество отображаемых карточек на 16
+    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 4); // Увеличиваем количество отображаемых карточек на 16
   };
 
   return (
