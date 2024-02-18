@@ -11,10 +11,3 @@
     src:
     url('./static/Inter-Medium.ttf') format('truetype');
 }
-
-@font-face {
-    font-family: 'Inter';
-    font-weight: 900;
-    src:
-    url('./static/Inter-Black.ttf') format('truetype');
-}

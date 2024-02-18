@@ -15,5 +15,6 @@
     justify-content: space-between;
     align-items: center;
     transition: right .4s;
+    z-index: 1;
   }
 }
