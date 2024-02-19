@@ -5,3 +5,10 @@
   column-gap: 20px;
   list-style-type: none;
 }
+
+@media screen and (max-width: 510px) {
+  .footer__list {
+    flex-direction: column;
+    row-gap: 12px;
+  }
+}

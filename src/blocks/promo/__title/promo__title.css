@@ -2,7 +2,7 @@
   margin: 50px 0 0 70px;
   padding: 0;
   max-width: 626px;
-  font-family: Inter,Arial,Helvetica,sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 40px;
   font-style: normal;
   font-weight: 400;
@@ -15,5 +15,12 @@
   .promo__title {
     margin: 300px auto 0;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .promo__title {
+    margin: 183px 10px 0;
+    font-size: calc(31px + (40 - 31) * ((100vw - 320px) / (768 - 320)));
   }
 }

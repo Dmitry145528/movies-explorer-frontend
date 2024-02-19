@@ -8,3 +8,10 @@
   color: #8b8b8b;
   border-bottom: 1px solid #8b8b8b;
 }
+
+@media screen and (max-width: 510px) {
+  .footer__text {
+    font-size: 12px;
+    padding-bottom: 21px;
+  }
+}

@@ -3,6 +3,19 @@
   margin: 0;
   display: flex;
   list-style-type: none;
-  flex-direction: row;
-  column-gap: 10px;
+  gap: 10px;
+}
+
+@media screen and (max-width: 710px) {
+  .techs__list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .techs__list {
+    justify-content: start;
+    max-width: 178px;
+  }
 }

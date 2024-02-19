@@ -16,3 +16,12 @@
     margin-bottom: 80px;
   }
 }
+
+@media screen and (max-width: 710px) {
+  .techs__title {
+    margin-bottom: 60px;
+    padding-bottom: 28px;
+    border-color: #000;
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (768 - 320)));
+  }
+}

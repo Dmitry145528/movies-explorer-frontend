@@ -9,3 +9,10 @@
   color: #fff;
   border-bottom: 1px solid #dadada;
 }
+
+@media screen and (max-width: 710px) {
+  .about-project__title {
+    padding-bottom: 28px;
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (768 - 320)));
+  }
+}

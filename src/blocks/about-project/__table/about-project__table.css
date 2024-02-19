@@ -1,6 +1,6 @@
 .about-project__table {
   display: grid;
-  grid-template-rows: minmax(35px, 36px) minmax(min-content, max-content);
+  grid-template-rows: minmax(35px, max-content) minmax(min-content, max-content);
   grid-template-columns: minmax(100px, 228px) minmax(184px, 912px);
   row-gap: 14px;
 }
@@ -8,5 +8,11 @@
 @media screen and (max-width: 768px) {
   .about-project__table {
     grid-template-columns: minmax(100px, 140px) minmax(184px, 912px);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .about-project__table {
+    row-gap: 10px;
   }
 }

@@ -8,3 +8,9 @@
   letter-spacing: -0.04em;
   color: #fff;
 }
+
+@media screen and (max-width: 710px) {
+  .techs__content_title {
+    font-size: calc(30px + (50 - 30) * ((100vw - 320px) / (768 - 320)));
+  }
+}

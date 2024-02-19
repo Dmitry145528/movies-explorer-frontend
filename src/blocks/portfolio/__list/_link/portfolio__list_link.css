@@ -25,6 +25,7 @@
 .portfolio__list li:last-child .portfolio__list_link {
   border-bottom: none;
   margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -32,5 +33,12 @@
     font-size: 28px;
     line-height: 179%;
     border-color: #e6e6e6;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .portfolio__list_link {
+    font-size: calc(18px + (28 - 18) * ((100vw - 320px) / (768 - 320)));
+    line-height: 156%;
   }
 }

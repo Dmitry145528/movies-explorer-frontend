@@ -1,16 +1,6 @@
 @media screen and (max-width: 768px) {
   .header__container_mobile-open {
-    display: flex;
-    position: fixed;
-    flex-direction: column;
     right: 0;
-    top: 0;
-    height: 100%;
-    width: 520px;
-    background-color: #202020;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
     transition: right .4s;
   }
 }

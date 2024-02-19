@@ -6,8 +6,7 @@
 
 @media screen and (max-width: 768px) {
   .promo__img {
-    max-width: 680px;
-    max-height: 230px;
-    width: 100%;
+    width: 680px;
+    height: 230px;
   }
 }

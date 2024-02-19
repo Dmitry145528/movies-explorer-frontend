@@ -16,3 +16,9 @@
     font-weight: 400;
   }
 }
+
+@media screen and (max-width: 650px) {
+  .about-project__table_text {
+    font-size: 11px;
+  }
+}

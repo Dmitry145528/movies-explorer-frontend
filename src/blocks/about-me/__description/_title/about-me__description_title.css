@@ -15,3 +15,9 @@
     line-height: 100%;
   }
 }
+
+@media screen and (max-width: 710px) {
+  .about-me__description_title {
+    font-size: calc(30px + (40 - 30) * ((100vw - 320px) / (768 - 320)));
+  }
+}

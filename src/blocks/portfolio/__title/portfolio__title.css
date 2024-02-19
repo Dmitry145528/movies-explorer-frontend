@@ -7,3 +7,11 @@
   line-height: 111%;
   color: #8b8b8b;
 }
+
+@media screen and (max-width: 710px) {
+  .portfolio__title {
+    line-height: 143%;
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (768 - 320)));
+    color: #a0a0a0;
+  }
+}

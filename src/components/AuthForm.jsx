@@ -67,7 +67,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
               value={values.email || ''}
               onChange={handleChange}
               className={`auth__input ${errors.email ? 'auth__input_error' : ''}`}
-              maxLength="35"
+              maxLength="37"
               required
             />
             <span className="auth__input-error">{errors.email}</span>

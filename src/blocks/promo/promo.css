@@ -3,5 +3,17 @@
   flex-direction: column;
   background-color: #073042;
   margin-top: -74px;
-  padding-top: 74px
+  padding-top: 74px;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .promo {
+    overflow: hidden;
+  }
 }

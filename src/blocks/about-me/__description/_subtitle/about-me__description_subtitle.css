@@ -1,5 +1,5 @@
 .about-me__description_subtitle {
-  margin: 18px 0 26px 0;
+  margin: 18px 0 26px;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-style: normal;
@@ -12,6 +12,14 @@
   .about-me__description_subtitle {
     font-size: 12px;
     line-height: 150%;
-    margin: 16px 0 20px 0;
+    margin: 16px 0 20px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .about-me__description_subtitle {
+    font-size: 11px;
+    line-height: 145%;
+    margin: 20px 0;
   }
 }

@@ -7,10 +7,10 @@
     display: flex;
     position: fixed;
     flex-direction: column;
-    right: -520px;
+    right: -100%;
     top: 0;
     height: 100%;
-    width: 520px;
+    width: 67.7%;
     background-color: #202020;
     justify-content: space-between;
     align-items: center;

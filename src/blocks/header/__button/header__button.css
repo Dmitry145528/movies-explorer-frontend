@@ -8,3 +8,10 @@
   width: 76px;
   border-radius: 3px;
 }
+
+@media screen and (max-width: 510px) {
+  .header__button {
+    height: 26px;
+    width: 54px;
+  }
+}

@@ -15,3 +15,9 @@
   color: #000;
   background-color: #3DDC84;
 }
+
+@media screen and (max-width: 650px) {
+  .about-project__table_title {
+    font-size: 11px;
+  }
+}
