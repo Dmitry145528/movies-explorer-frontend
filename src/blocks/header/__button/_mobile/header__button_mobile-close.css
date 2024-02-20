@@ -13,6 +13,13 @@
     position: fixed;
     top: 22.5px;
     right: 22.5px;
-    z-index: 1;
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .header__button_mobile-close {
+    top: 13.5px;
+    right: 13.5px;
   }
 }

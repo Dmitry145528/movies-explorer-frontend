@@ -89,6 +89,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
             <span className="auth__input-error">{errors.password}</span>
           </div>
         </fieldset>
+        <p className="auth__enter-error">Тут будут располагаться сетевые ошибки</p>
         <button className={`auth__button ${currentPath === '/signin' ? 'auth__button_log' : 'auth__button_reg'} ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью ${buttonText}`} disabled={!isValid}>
           {buttonText}
         </button>

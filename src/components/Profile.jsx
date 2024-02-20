@@ -24,7 +24,7 @@ function Profile(props) {
 
   return (
     <main className="auth profile">
-      <h1 className="auth__header_title">{`Привет, ${values.name || "заглушка"}`}</h1>
+      <h1 className="auth__header_title">{`Привет, ${values.name || "MARVO"}`}</h1>
       <form className="auth__form">
         <fieldset className="auth__contact-info profile__contact-info">
           <div className="auth__field profile__field">
@@ -63,7 +63,10 @@ function Profile(props) {
           </div>
         </fieldset>
         {isEditing ? (
+          <>
+          <p className="auth__enter-error">Тут будут располагаться сетевые ошибки</p>
           <button type="button" className={`auth__button ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью Сохранить`} onClick={handleSubmit} disabled={!isValid}>{'Сохранить'}</button>
+          </>
         ) : (
           <button type="button" className="profile__button" onClick={handleEditClick} aria-label={`Кнопка с надписью редактировать`}>
             {'Редактировать'}

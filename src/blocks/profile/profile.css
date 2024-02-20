@@ -6,6 +6,12 @@
 @media screen and (max-width: 768px) {
   .profile {
     margin: 236px auto 269px;
-    max-width: 410px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .profile {
+    margin: 70px auto 40px;
+    max-width: 260px;
   }
 }

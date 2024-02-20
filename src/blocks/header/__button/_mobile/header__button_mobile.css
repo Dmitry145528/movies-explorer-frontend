@@ -2,7 +2,8 @@
   display: none;
   width: 28px;
   height: 23px;
-  background: url('../../../../images/burger-button.svg') center/28px 23px no-repeat transparent;
+  background: url("../../../../images/burger-button.svg") center/28px 23px
+    no-repeat transparent;
   border: none;
   padding: 0;
 }
@@ -11,5 +12,14 @@
   .header__button_mobile {
     display: block;
     margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .header__button_mobile {
+    margin-right: 9px;
+    width: 22px;
+    height: 20.5px;
+    background-size: 22px 20.5px;
   }
 }

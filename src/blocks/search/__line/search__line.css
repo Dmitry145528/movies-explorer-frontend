@@ -3,3 +3,15 @@
   height: 40px;
   margin: 0 30px;
 }
+
+@media screen and (max-width: 768px) {
+  .search__line {
+    margin: 0 19px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .search__line {
+    display: none;
+  }
+}

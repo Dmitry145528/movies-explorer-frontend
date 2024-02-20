@@ -8,3 +8,9 @@
     margin: 80px 30px;
   }
 }
+
+@media screen and (max-width: 510px) {
+  .content {
+    margin: 80px 10px;
+  }
+}

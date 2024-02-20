@@ -11,3 +11,10 @@
     margin: 232px auto;
   }
 }
+
+@media screen and (max-width: 510px) {
+  .auth {
+    max-width: 260px;
+    margin: 56px auto 30px;
+  }
+}

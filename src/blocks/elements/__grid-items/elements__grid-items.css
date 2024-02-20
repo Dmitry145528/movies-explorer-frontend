@@ -10,6 +10,18 @@
 
 @media screen and (max-width: 768px) {
   .elements__grid-items {
-    gap: 30px 30px;
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .elements__grid-items {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .elements__grid-items {
+    gap: 34px;
   }
 }

@@ -11,3 +11,9 @@
     margin: 408px auto 222px;
   }
 }
+
+@media screen and (max-width: 510px) {
+  .not-found {
+    margin: 329px auto 30px;
+  }
+}

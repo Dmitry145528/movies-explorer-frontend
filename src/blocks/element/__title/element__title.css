@@ -5,6 +5,12 @@
   font-style: normal;
   font-weight: 500;
   color: #fff;
-  max-width: 226px;
-  max-height: 32px;
+  line-height: normal;
+  text-align: left;
+}
+
+@media screen and (max-width: 510px) {
+  .element__title {
+    font-size: 12px;
+  }
 }

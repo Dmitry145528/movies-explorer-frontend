@@ -1,0 +1,9 @@
+.search__filter {
+  display: flex;
+}
+
+@media screen and (max-width: 650px) {
+  .search__filter {
+    display: none;
+  }
+}

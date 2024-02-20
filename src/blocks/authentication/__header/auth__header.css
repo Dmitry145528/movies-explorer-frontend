@@ -4,3 +4,10 @@
   align-items: start;
   row-gap: 40px;
 }
+
+@media screen and (max-width: 510px) {
+  .auth__header {
+    align-items: center;
+    row-gap: 50px;
+  }
+}

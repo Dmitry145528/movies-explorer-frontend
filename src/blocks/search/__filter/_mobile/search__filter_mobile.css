@@ -1,0 +1,10 @@
+.search__filter_mobile {
+  display: none;
+}
+
+@media screen and (max-width: 650px) {
+  .search__filter_mobile {
+    display: flex;
+    margin: 45px auto;
+  }
+}

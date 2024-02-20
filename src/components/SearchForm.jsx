@@ -26,6 +26,11 @@ function SearchForm() {
           </button>
         </form>
         <span className="search__line"></span>
+        <div className="search__filter">
+          <FilterCheckBox />
+        </div>
+      </div>
+      <div className="search__filter_mobile">
         <FilterCheckBox />
       </div>
     </section>

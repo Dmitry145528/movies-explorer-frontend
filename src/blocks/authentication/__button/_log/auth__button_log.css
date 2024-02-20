@@ -1,3 +1,9 @@
 .auth__button_log {
   margin-top: 132px;
 }
+
+@media screen and (max-width: 510px) {
+  .auth__button_log {
+    margin-top: 226px;
+  }
+}

@@ -10,3 +10,9 @@
   cursor: pointer;
   background-color: transparent;
 }
+
+@media screen and (max-width: 510px) {
+  .profile__caption-link {
+    font-size: 12px;
+  }
+}

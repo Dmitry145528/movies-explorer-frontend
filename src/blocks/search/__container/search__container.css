@@ -4,4 +4,11 @@
   height: 72px;
   background-color: #2f2f2f;
   border-radius: 9px;
+  padding: 0 25px;
+}
+
+@media screen and (max-width: 768px) {
+  .search__container {
+    padding: 0 20px;
+  }
 }

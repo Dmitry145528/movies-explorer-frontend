@@ -19,3 +19,10 @@
     opacity: 0.8;
   }
 }
+
+@media screen and (max-width: 510px) {
+  .auth__button {
+    font-size: 12px;
+    padding: 15px 0;
+  }
+}

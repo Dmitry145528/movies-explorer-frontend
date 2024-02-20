@@ -1,18 +1,24 @@
-import SearchForm from './SearchForm'
-import MoviesCardList from './MoviesCardList'
-import MoviesCard from './MoviesCard'
-import { useState, useEffect } from 'react'
+import SearchForm from './SearchForm';
+import MoviesCardList from './MoviesCardList';
+import MoviesCard from './MoviesCard';
+import Preloader from './Preloader';
+import { useState, useEffect } from 'react';
 
 function SavedMovies() {
   const [movies, setMovies] = useState([]);
-  const [visibleMovies, setVisibleMovies] = useState(16); // Начальное количество отображаемых карточек
+  const [visibleMovies, setVisibleMovies] = useState(16);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMoviesData = async () => {
       try {
-        const response = await fetch('./src/utils/moviesData.json');
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        const response = await fetch('./src/utils/moviesSaveData.json');
         const data = await response.json();
+
         setMovies(data);
+        setLoading(false);
       } catch (error) {
         console.error('Ошибка при загрузке данных:', error);
       }
@@ -22,20 +28,26 @@ function SavedMovies() {
   }, []);
 
   const handleShowMore = () => {
-    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 16); // Увеличиваем количество отображаемых карточек на 16
+    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 16);
   };
 
   return (
-    <main className='content'>
+    <main className="content">
       <SearchForm />
-      <MoviesCardList
-        movieItems={movies.slice(0, visibleMovies).map(movie => (
-          <MoviesCard
-            key={movie._id}
-            movie={movie}
-          />
-        ))}
-      />
+      {loading ? (
+        <Preloader />
+      ) : movies.length === 0 ? (
+        <p className="not-found__text not-found__result">По вашему запросу ничего не найдено!</p>
+      ) : (
+        <MoviesCardList
+          movieItems={movies.slice(0, visibleMovies).map(movie => (
+            <MoviesCard
+              key={movie._id}
+              movie={movie}
+            />
+          ))}
+        />
+      )}
       {visibleMovies < movies.length && (
         <button className="elements__button" onClick={handleShowMore}>
           Ещё
@@ -45,4 +57,4 @@ function SavedMovies() {
   );
 }
 
-export default SavedMovies;
+export default SavedMovies

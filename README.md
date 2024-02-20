@@ -1,8 +1,22 @@
-# React + Vite
+# Дипломный проект: Movie Explorer (React) от _"Yandex Practicum"_.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание:
 
-Currently, two official plugins are available:
+Дипломный проект "Movie Explorer" представляет собой веб-приложение, созданное с использованием React, которое позволяет пользователям открывать увлекательный мир кино. С приложением вы можете легко находить информацию о различных фильмах, исследовать новые кинематографические шедевры и сохранять свои любимые фильмы для последующего просмотра.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## В данном проекте использованы следующие технолгии и инструменты:
+
+1. Библиотека React для разработки пользовательского интерфейса.
+2. Хуки useState и useEffect для управления состоянием компонентов и выполнения побочных эффектов.
+3. CSS-фреймворк Flexbox для гибкой вёрстки.
+4. Технология @font-face для подключения шрифтов.
+5. CSS-фреймворк Grid-Layout для создания сложных сеток.
+6. Использование относительных единиц измерения, таких как vw, vh, %, rem и em для создания адаптивных интерфейсов.
+7. Использование псевдокласса :hover для интерактивных элементов.
+8. Формы и валидация данных.
+9. Позиционирование элементов.
+10. Методология БЭМ (Nested) для именования классов CSS.
+11. Адаптивная вёрстка с использованием медиазапросов @media screen.
+12. Обработка массивов данных.
+13. Работа с данными по умолчанию.
+14. Модульная структура проекта с использованием import и export.

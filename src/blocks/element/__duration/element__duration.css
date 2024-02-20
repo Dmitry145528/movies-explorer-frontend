@@ -8,3 +8,9 @@
   line-height: normal;
   text-align: left;
 }
+
+@media screen and (max-width: 510px) {
+  .element__duration {
+    font-size: 10px;
+  }
+}

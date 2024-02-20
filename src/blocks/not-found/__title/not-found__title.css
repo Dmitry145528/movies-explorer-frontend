@@ -6,3 +6,10 @@
   font-size: 140px;
   color: #fff;
 }
+
+@media screen and (max-width: 510px) {
+  .not-found__title {
+    margin-bottom: 10px;
+    font-size: calc(80px + (140 - 80) * ((100vw - 320px) / (768 - 320)));
+  }
+}
