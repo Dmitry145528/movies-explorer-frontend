@@ -20,3 +20,6 @@
 12. Обработка массивов данных.
 13. Работа с данными по умолчанию.
 14. Модульная структура проекта с использованием import и export.
+
+## Макет: dark-1
+### Ссылка на макет: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/Дипломный-проект?type=design&node-id=1-6015&mode=design&t=m02vP9G3Pn0kaWv4-0
