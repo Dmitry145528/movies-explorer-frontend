@@ -1,3 +1,5 @@
+import MePhoto from '../images/me-photo.jpg'
+
 function AboutMe() {
   return (
     <section className="about-me">
@@ -10,7 +12,7 @@ function AboutMe() {
           <a href="https://github.com/Dmitry145528" rel="noreferrer noopener"
             target="_blank" className="about-me__description_link">Github</a>
         </article>
-        <img src="./src/images/me-photo.jpg" alt="" className="about-me__photo" />
+        <img src={MePhoto} alt="" className="about-me__photo" />
       </div>
     </section>
   )

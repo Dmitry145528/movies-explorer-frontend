@@ -1,3 +1,4 @@
+import SearchIcon from '../images/search-icon.svg'
 import FilterCheckBox from "./FilterCheckbox";
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 
@@ -8,7 +9,7 @@ function SearchForm() {
   return (
     <section className="search">
       <div className="search__container">
-        <img src="./src/images/search-icon.svg" alt="Иконка поиска" className="search__icon" />
+        <img src={SearchIcon} alt="Иконка поиска" className="search__icon" />
         <form className="search__form">
           <fieldset className="search__fieldset">
             <input

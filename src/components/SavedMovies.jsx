@@ -2,6 +2,7 @@ import SearchForm from './SearchForm';
 import MoviesCardList from './MoviesCardList';
 import MoviesCard from './MoviesCard';
 import Preloader from './Preloader';
+import Data from '../utils/moviesSaveData.json'
 import { useState, useEffect } from 'react';
 
 function SavedMovies() {
@@ -14,10 +15,7 @@ function SavedMovies() {
       try {
         await new Promise(resolve => setTimeout(resolve, 3000));
 
-        const response = await fetch('./src/utils/moviesSaveData.json');
-        const data = await response.json();
-
-        setMovies(data);
+        setMovies(Data);
         setLoading(false);
       } catch (error) {
         console.error('Ошибка при загрузке данных:', error);

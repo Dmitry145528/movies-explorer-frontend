@@ -1,3 +1,4 @@
+import Logo from '../images/logo.svg'
 import { useLocation, Link } from "react-router-dom"
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 import { useState, useEffect } from "react"
@@ -31,7 +32,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
     <main className="auth">
       <div className="auth__header">
         <Link className="auth__header_logo header__logo" to="/">
-          <img src='./src/images/logo.svg' alt="Логотип в виде улыбающегося смайлика" />
+          <img src={Logo} alt="Логотип в виде улыбающегося смайлика" />
         </Link>
         <h1 className="auth__header_title">{title}</h1>
       </div>
