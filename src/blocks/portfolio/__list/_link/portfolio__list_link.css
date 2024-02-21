@@ -3,11 +3,11 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 19px;
+  padding-right: 7px;
   margin-bottom: 20px;
   text-decoration: none;
   font-family: Inter, Arial, Helvetica, sans-serif;
   font-size: 30px;
-  font-style: normal;
   font-weight: 400;
   line-height: 167%;
   letter-spacing: -0.04em;
@@ -40,5 +40,6 @@
   .portfolio__list_link {
     font-size: calc(18px + (28 - 18) * ((100vw - 320px) / (768 - 320)));
     line-height: 156%;
+    padding-right: 0;
   }
 }

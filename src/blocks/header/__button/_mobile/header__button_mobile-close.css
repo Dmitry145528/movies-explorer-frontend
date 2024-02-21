@@ -2,7 +2,7 @@
   display: none;
   width: 22px;
   height: 22px;
-  background: url('../../../../images/close-button.svg') center/22px 22px no-repeat transparent;
+  background: url('../../../../images/close-button.svg') center/22px no-repeat transparent;
   border: none;
   padding: 0;
 }
@@ -19,7 +19,8 @@
 
 @media screen and (max-width: 510px) {
   .header__button_mobile-close {
-    top: 13.5px;
-    right: 13.5px;
+    top: 21px;
+    right: 18px;
+    background-size: 18px;
   }
 }

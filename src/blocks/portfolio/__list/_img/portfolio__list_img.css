@@ -1,0 +1,5 @@
+@media screen and (max-width: 320px) {
+  .portfolio__list_img {
+    width: 10px;
+  }
+}

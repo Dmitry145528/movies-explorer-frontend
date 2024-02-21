@@ -52,6 +52,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
                 className={`auth__input ${errors.name ? 'auth__input_error' : ''}`}
                 maxLength="30"
                 minLength="2"
+                placeholder="Введите имя"
                 required
               />
               <span className="auth__input-error">{errors.name}</span>
@@ -59,7 +60,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
           }
           <div className="auth__field">
             <label htmlFor="email" className="auth__label">
-              Email
+              E-mail
             </label>
             <input
               id="email"
@@ -69,6 +70,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
               onChange={handleChange}
               className={`auth__input ${errors.email ? 'auth__input_error' : ''}`}
               maxLength="37"
+              placeholder="Введите E-mail"
               required
             />
             <span className="auth__input-error">{errors.email}</span>
@@ -85,6 +87,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
               onChange={handleChange}
               className={`auth__input ${errors.password ? 'auth__input_error' : ''}`}
               minLength="8"
+              placeholder="Введите пароль"
               required
             />
             <span className="auth__input-error">{errors.password}</span>
