@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 
@@ -73,7 +73,7 @@ function Profile(props) {
           </button>
         )}
       </form>
-      {!isEditing ? (<button className="auth__caption-link profile__caption-link" onClick={handleExitClick} to='/signout'>{"Выйти из аккаунта"}</button>) : ('')}
+      {!isEditing ? (<Link className="auth__caption-link profile__caption-link" onClick={handleExitClick} to='/'>{"Выйти из аккаунта"}</Link>) : ('')}
     </main >
   )
 }

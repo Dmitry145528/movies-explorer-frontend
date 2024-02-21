@@ -3,7 +3,7 @@ function FilterCheckBox() {
     <>
       <label className="search__toggle">
         <input className="search__toggle_checkbox" type="checkbox" />
-        <div className="search__toggle_switch"></div>
+        <span className="search__toggle_switch"></span>
       </label>
       <p className="search__toggle_label">Короткометражки</p>
     </>
