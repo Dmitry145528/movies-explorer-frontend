@@ -1,0 +1,27 @@
+.elements__grid-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 38px 20px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  line-height: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .elements__grid-items {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .elements__grid-items {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .elements__grid-items {
+    gap: 34px;
+  }
+}

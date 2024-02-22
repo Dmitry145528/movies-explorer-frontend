@@ -1,0 +1,26 @@
+.header__button_mobile-close {
+  display: none;
+  width: 22px;
+  height: 22px;
+  background: url('../../../../images/close-button.svg') center/22px no-repeat transparent;
+  border: none;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header__button_mobile-close {
+    display: block;
+    position: fixed;
+    top: 22.5px;
+    right: 22.5px;
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .header__button_mobile-close {
+    top: 21px;
+    right: 18px;
+    background-size: 18px;
+  }
+}

@@ -1,0 +1,26 @@
+.about-project__content_text {
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 143%;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__content_text {
+    font-size: 12px;
+    line-height: 150%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .about-project__content_text {
+    font-size: 11px;
+    line-height: 145%;
+  }
+
+  .about-project__content_text:nth-child(2) {
+    margin-bottom: 40px;
+  }
+}

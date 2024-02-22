@@ -1,0 +1,12 @@
+.header__list_auth-mobile {
+  flex-direction: column;
+  row-gap: 28px;
+  margin: 159px auto 0;
+}
+
+@media screen and (max-width: 510px) {
+  .header__list_auth-mobile {
+    margin: 144px auto 0;
+    row-gap: 24px;
+  }
+}

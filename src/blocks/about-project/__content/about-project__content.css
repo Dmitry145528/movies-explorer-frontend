@@ -1,0 +1,25 @@
+.about-project__content {
+  margin: 70px 0 110px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: minmax(min-content, max-content) minmax(min-content, max-content);
+  grid-template-columns: minmax(284px, max-content) minmax(284px, max-content);
+  gap: 26px 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__content {
+    margin: 70px 0 93px;
+    gap: 22px 30px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .about-project__content {
+    grid-auto-flow: row;
+    justify-content: center;
+    grid-template-columns: 284px;
+    row-gap: 16px;
+    margin: 60px 0;
+  }
+}

@@ -1,0 +1,22 @@
+.about-project__table_title {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Inter,Arial,Helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #303030;
+}
+
+.about-project__table_title:first-of-type {
+  color: #000;
+  background-color: #3DDC84;
+}
+
+@media screen and (max-width: 650px) {
+  .about-project__table_title {
+    font-size: 11px;
+  }
+}

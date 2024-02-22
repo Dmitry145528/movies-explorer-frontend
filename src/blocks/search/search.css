@@ -1,0 +1,21 @@
+.search {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-bottom: 69px;
+  border-bottom: 1px solid #424242;
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    max-width: 708px;
+    padding-bottom: 109px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .search {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+}

@@ -1,0 +1,31 @@
+.about-me__description_text {
+  margin: 0 40px 99px 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 157%;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__description_text {
+    font-size: 12px;
+    line-height: 150%;
+    margin-bottom: 87px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .about-me__description_text {
+    font-size: 11px;
+    line-height: 145%;
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .about-me__description_text {
+    max-width: 292px;
+    margin: 0 auto 40px;
+  }
+}

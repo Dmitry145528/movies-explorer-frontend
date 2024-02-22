@@ -1,0 +1,15 @@
+.header__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  column-gap: 30px;
+  align-items: center;
+  line-height: 0;
+}
+
+@media screen and (max-width: 510px) {
+  .header__list {
+    column-gap: 14px;
+  }
+}

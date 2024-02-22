@@ -1,0 +1,24 @@
+.about-me__description_subtitle {
+  margin: 18px 0 26px;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 111%;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__description_subtitle {
+    font-size: 12px;
+    line-height: 150%;
+    margin: 16px 0 20px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .about-me__description_subtitle {
+    font-size: 11px;
+    line-height: 145%;
+    margin: 20px 0;
+  }
+}

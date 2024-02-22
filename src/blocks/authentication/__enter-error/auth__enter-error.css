@@ -1,0 +1,10 @@
+.auth__enter-error {
+  position: absolute;
+  margin: 0;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  color: #ee3465;
+  bottom: 65px;
+  align-self: center;
+}

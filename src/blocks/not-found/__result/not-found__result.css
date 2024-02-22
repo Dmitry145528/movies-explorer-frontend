@@ -1,0 +1,10 @@
+.not-found__result {
+  font-size: 20px;
+  margin-top: 159px;
+}
+
+@media screen and (max-width: 510px) {
+  .not-found__text {
+    font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (768 - 320)));
+  }
+}

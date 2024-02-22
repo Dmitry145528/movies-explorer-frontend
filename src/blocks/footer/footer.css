@@ -1,0 +1,17 @@
+.footer {
+  padding-top: 79px;
+  margin: 0 70px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .footer {
+    margin: 0 10px;
+  }
+}

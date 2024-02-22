@@ -1,0 +1,26 @@
+.header__container_mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header__container_mobile {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    right: -100%;
+    top: 0;
+    height: 100%;
+    width: 67.7%;
+    background-color: #202020;
+    justify-content: space-between;
+    align-items: center;
+    transition: right .4s;
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header__container_mobile {
+    width: 100%;
+  }
+}

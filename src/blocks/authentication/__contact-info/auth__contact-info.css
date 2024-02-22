@@ -1,0 +1,15 @@
+.auth__contact-info {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 0;
+  border: none;
+  margin: 40px 0 83px;
+  row-gap: 24px;
+}
+
+@media screen and (max-width: 510px) {
+  .auth__contact-info {
+    margin-top: 83px;
+  }
+}

@@ -1,0 +1,15 @@
+.about-me__description {
+  max-width: 600px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__description {
+    max-width: 364px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .about-me__description {
+    max-width: 292px;
+  }
+}

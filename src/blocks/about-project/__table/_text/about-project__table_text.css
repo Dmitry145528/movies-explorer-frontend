@@ -1,0 +1,23 @@
+.about-project__table_text {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Inter,Arial,Helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 121%;
+  color: #8b8b8b;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__table_text {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .about-project__table_text {
+    font-size: 11px;
+  }
+}

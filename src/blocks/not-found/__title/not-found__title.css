@@ -1,0 +1,14 @@
+.not-found__title {
+  margin: 0 0 5px 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 140px;
+  color: #fff;
+}
+
+@media screen and (max-width: 510px) {
+  .not-found__title {
+    margin-bottom: 10px;
+    font-size: calc(80px + (140 - 80) * ((100vw - 320px) / (768 - 320)));
+  }
+}

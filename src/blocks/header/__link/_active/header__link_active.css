@@ -1,0 +1,16 @@
+.header__link_active {
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .header__link_active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid #fff;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .header__link_active {
+    padding-bottom: 7px;
+  }
+}

@@ -1,0 +1,26 @@
+.techs__title {
+  margin: 0;
+  margin-bottom: 90px;
+  padding-bottom: 23px;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: #fff;
+  border-bottom: 1px solid #dadada;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__title {
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .techs__title {
+    margin-bottom: 60px;
+    padding-bottom: 28px;
+    border-color: #000;
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (768 - 320)));
+  }
+}

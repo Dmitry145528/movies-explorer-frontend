@@ -1,0 +1,24 @@
+.profile__button {
+  padding: 0;
+  border: none;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  text-align: center;
+  color: #fff;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@media screen and (min-width: 930px) {
+  .profile__button:hover {
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .profile__button {
+    font-size: 12px;
+  }
+}
