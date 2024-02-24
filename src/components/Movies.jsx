@@ -1,6 +1,6 @@
-import SearchForm from './SearchForm'
-import MoviesCardList from './MoviesCardList'
-import MoviesCard from './MoviesCard'
+import SearchForm from './SearchForm';
+import MoviesCardList from './MoviesCardList';
+import MoviesCard from './MoviesCard';
 import Preloader from './Preloader';
 import Data from '../utils/moviesData.json'
 import { useState, useEffect } from 'react'

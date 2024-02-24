@@ -1,8 +1,10 @@
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import LoggedInStatusContext  from '../contexts/LoggedInStatusContext'
 import Logo from '../images/logo.svg'
 
-function Header({ login }) {
+function Header() {
+  const loggedIn = useContext(LoggedInStatusContext);
 
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
@@ -22,7 +24,7 @@ function Header({ login }) {
         <Link className="header__logo" to="/">
           <img src={Logo} alt="Логотип в виде улыбающегося смайлика" />
         </Link>
-        {login === true ? (
+        {loggedIn === true ? (
           <>
             <nav className="header__container">
               <ul className='header__list header__list_auth'>

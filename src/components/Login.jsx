@@ -1,13 +1,29 @@
 import AuthForm from "./AuthForm"
 import { useNavigate } from "react-router-dom"
+import * as Auth from "../utils/Auth"
 
 function Login(props) {
 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    props.handleLogin();
-    navigate('/', { replace: true });
+  const handleSubmit = (formValue) => {
+    if (formValue.password && formValue.email) {
+      const { password, email } = formValue;
+      Auth.onLogin(password, email)
+        .then((data) => {
+          if (data._id) {
+            Auth.checkToken(data._id).then((res) => {
+              if (res) {
+                props.handleLogin(true);
+                navigate('/', { replace: true });
+              }
+            });
+          }
+        })
+        .catch(err => {
+          console.log('Ошибка при запросе авторизации:', err);
+        });
+    }
   }
 
   return (
