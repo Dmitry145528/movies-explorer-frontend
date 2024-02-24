@@ -22,6 +22,15 @@ class MainApi {
       headers: this._headers
     });
   }
+
+  setProfileInfo({ name, email }) {
+    return this.request(`${this._url}/users/me`, {
+      method: 'PATCH',
+      credentials: "include",
+      headers: this._headers,
+      body: JSON.stringify({ name, email })
+    });
+  }
 }
 
 const mainApi = new MainApi({

@@ -61,6 +61,16 @@ function App() {
       });
   }
 
+  const handleUpdateUser = (userData) => {
+    return mainApi.setProfileInfo(userData)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+      })
+      .catch((err) => {
+        console.error('Ошибка обновления данных пользователя:', err);
+      })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <LoggedInStatusContext.Provider value={loggedIn}>
@@ -76,6 +86,7 @@ function App() {
               element={Profile}
               handleLogin={handleLogin}
               onSignOut={onSignOut}
+              onUpdateUser={handleUpdateUser}
             />}
             />
             <Route path="*" element={<NotFound />} />
