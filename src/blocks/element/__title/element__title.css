@@ -5,6 +5,8 @@
   font-weight: 500;
   color: #fff;
   text-align: left;
+  line-height: normal;
+  max-width: 240px;
 }
 
 @media screen and (max-width: 510px) {

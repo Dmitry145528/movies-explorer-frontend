@@ -2,31 +2,34 @@ import SearchForm from './SearchForm';
 import MoviesCardList from './MoviesCardList';
 import MoviesCard from './MoviesCard';
 import Preloader from './Preloader';
-import Data from '../utils/moviesData.json'
 import { useState, useEffect } from 'react'
+import moviesApi from '../utils/MoviesApi';
 
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [visibleMovies, setVisibleMovies] = useState(16);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchMoviesData = async () => {
-      try {
-        await new Promise(resolve => setTimeout(resolve, 3000));
-
-        setMovies(Data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Ошибка при загрузке данных:', error);
-      }
+    const fetchMoviesData = () => {
+      moviesApi.getInitialMovies()
+        .then((initialMovies) => {
+          setLoading(true);
+          setMovies(initialMovies);
+        })
+        .catch((error) => {
+          console.error('Ошибка при запросе к API:', error);
+        })
+        .finally(() => {
+          setLoading(false);
+        })
     };
 
     fetchMoviesData();
   }, []);
 
   const handleShowMore = () => {
-    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 16);
+    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 4);
   };
 
   return (
@@ -40,7 +43,7 @@ function Movies() {
         <MoviesCardList
           movieItems={movies.slice(0, visibleMovies).map(movie => (
             <MoviesCard
-              key={movie._id}
+              key={movie.id}
               movie={movie}
             />
           ))}
