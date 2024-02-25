@@ -5,7 +5,9 @@ const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   } else {
-    return Promise.reject(`Ошибка ${res.status} ${res.statusText}`);
+    return res.json().then((error) => {
+      return Promise.reject({ error, status: res.status });
+    });
   }
 }
 
@@ -22,6 +24,14 @@ const register = (password, email, name) => {
     },
     body: JSON.stringify({ password, email, name })
   })
+    .then((data) => {
+      if (data._id) {
+        localStorage.setItem('userId', data._id);
+        return data;
+      } else {
+        return;
+      }
+    })
 }
 
 const onLogin = (password, email) => {
@@ -52,15 +62,5 @@ const onLogout = () => {
     }
   });
 }
-
-// const checkToken = () => {
-//   return request(`${BASE_URL}/users/me`, {
-//     method: 'GET',
-//     credentials: "include",
-//     headers: {
-//       'Content-Type': 'application/json',
-//     }
-//   })
-// } Пока не используется
 
 export { BASE_URL, register, onLogin, onLogout }

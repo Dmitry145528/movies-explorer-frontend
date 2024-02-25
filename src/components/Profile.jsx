@@ -1,32 +1,26 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Profile(props) {
 
   const currentUser = useContext(CurrentUserContext);
-  const [submitButtonText, setSubmitButtonText] = useState('Сохранить');
   const { values, handleChange, errors, isValid } = useFormAndValidation();
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleEditClick = () => {
-    setIsEditing(true);
+    props.editProfile(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (isValid) {
-      setSubmitButtonText('Сохранение...');
-      setIsEditing(false);
 
       props.onUpdateUser({
         name: values.name,
         email: values.email,
       })
-        .finally(() => {
-          setSubmitButtonText('Сохранить');
-        });
+
     } else {
       console.log('Форма невалидна, отправка данных отклонена.');
     }
@@ -52,7 +46,7 @@ function Profile(props) {
               minLength="2"
               placeholder={currentUser.name}
               required
-              disabled={!isEditing} // Делаем поле неактивным при просмотре
+              disabled={!props.isEditing} // Делаем поле неактивным при просмотре
             />
           </div>
           <span className="profile__contact-info_line"></span>
@@ -70,14 +64,14 @@ function Profile(props) {
               maxLength="35"
               placeholder={currentUser.email}
               required
-              disabled={!isEditing} // Делаем поле неактивным при просмотре
+              disabled={!props.isEditing} // Делаем поле неактивным при просмотре
             />
           </div>
         </fieldset>
-        {isEditing ? (
+        {props.isEditing ? (
           <>
-            <p className="auth__enter-error">Тут будут располагаться сетевые ошибки</p>
-            <button type="button" className={`auth__button ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью Сохранить`} onClick={handleSubmit} disabled={!isValid}>{submitButtonText}</button>
+            <p className="auth__enter-error">{props.error}</p>
+            <button type="button" className={`auth__button ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью Сохранить`} onClick={handleSubmit} disabled={!isValid}>{"Сохранить"}</button>
           </>
         ) : (
           <button type="button" className="profile__button" onClick={handleEditClick} aria-label={`Кнопка с надписью редактировать`}>
@@ -85,7 +79,7 @@ function Profile(props) {
           </button>
         )}
       </form>
-      {!isEditing ? (<button className="auth__caption-link profile__caption-link" onClick={props.onSignOut}>{"Выйти из аккаунта"}</button>) : ('')}
+      {!props.isEditing ? (<button className="auth__caption-link profile__caption-link" onClick={props.onSignOut}>{"Выйти из аккаунта"}</button>) : ('')}
     </main >
   )
 }

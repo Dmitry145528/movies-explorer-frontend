@@ -21,7 +21,9 @@ function App() {
   const navigate = useNavigate();
   const [currentPath, setCurrentPath] = useState(location.pathname);
   const [currentUser, setCurrentUser] = useState('');
+  const [error, setError] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -36,7 +38,7 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
           handleLogin(true);
-          navigate('/', { replace: true });
+          navigate('/movies', { replace: true });
         })
         .catch(err => {
           console.error('Ошибка при запросе к API:', err);
@@ -46,6 +48,10 @@ function App() {
 
   const handleLogin = (status) => {
     setLoggedIn(status);
+  }
+
+  const editProfile = (status) => {
+    setIsEditing(status);
   }
 
   const onSignOut = () => {
@@ -65,10 +71,14 @@ function App() {
     return mainApi.setProfileInfo(userData)
       .then((newUserData) => {
         setCurrentUser(newUserData);
+        setIsEditing(false);
+        setError('');
       })
       .catch((err) => {
-        console.error('Ошибка обновления данных пользователя:', err);
-      })
+        setError(err.status === 409 ? err.error.message : 'При обновлении профиля произошла ошибка.');
+        setIsEditing(true);
+        console.error(err.error.message);
+      });
   }
 
   return (
@@ -78,7 +88,7 @@ function App() {
           {(currentPath === '/' || currentPath === '/profile' || currentPath === '/movies' || currentPath === '/saved-movies') && <Header />}
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="signup" element={<Register />} />
+            <Route path="signup" element={<Register handleLogin={handleLogin} />} />
             <Route path="signin" element={<Login handleLogin={handleLogin} />} />
             <Route path="movies" element={<ProtectedRouteElement element={Movies} />} />
             <Route path="saved-movies" element={<ProtectedRouteElement element={SavedMovies} />} />
@@ -87,6 +97,9 @@ function App() {
               handleLogin={handleLogin}
               onSignOut={onSignOut}
               onUpdateUser={handleUpdateUser}
+              isEditing={isEditing}
+              editProfile={editProfile}
+              error={error}
             />}
             />
             <Route path="*" element={<NotFound />} />

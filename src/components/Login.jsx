@@ -1,4 +1,5 @@
 import AuthForm from "./AuthForm"
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import * as Auth from "../utils/Auth"
 import mainApi from "../utils/MainApi";
@@ -6,6 +7,7 @@ import mainApi from "../utils/MainApi";
 function Login(props) {
 
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleSubmit = (formValue) => {
     if (formValue.password && formValue.email) {
@@ -16,13 +18,15 @@ function Login(props) {
             mainApi.getProfileInfo(data._id).then((res) => {
               if (res) {
                 props.handleLogin(true);
-                navigate('/', { replace: true });
+                setError('');
+                navigate('/movies', { replace: true });
               }
-            });
+            })
           }
         })
         .catch(err => {
-          console.log('Ошибка при запросе авторизации:', err);
+          setError(err.status === 401 ? err.error.message : 'При авторизации произошла ошибка.');
+          console.error('Ошибка при запросе авторизации:', err.error.message);
         });
     }
   }
@@ -34,6 +38,7 @@ function Login(props) {
       buttonText="Войти"
       linkText="Ещё не зарегистрированы?"
       linkTo="/signup"
+      error={error}
     />
   );
 }
