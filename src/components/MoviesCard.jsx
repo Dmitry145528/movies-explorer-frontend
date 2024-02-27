@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 
-function MoviesCard(props) {
+function MoviesCard({ movie }) {
 
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
@@ -22,13 +22,15 @@ function MoviesCard(props) {
   };
 
   return (
-    <li className="element" key={props.movie.id}>
-      <img className="element__video" alt={props.movie.nameRU} src={`https://api.nomoreparties.co${props.movie.image.url}`} />
+    <li className="element" key={movie.id}>
+      <a className="element__link" href={movie.trailerLink} rel="noreferrer noopener" target="_blank">
+        <img className="element__image" alt={movie.nameRU} src={`https://api.nomoreparties.co${movie.image.url}`} />
+      </a>
       <div className="element__pos-element">
-        <h2 className="element__title">{props.movie.nameRU}</h2>
+        <h2 className="element__title">{movie.nameRU}</h2>
         <button className={currentPath === '/movies' ? "element__heart" : "element__heart element__delete"}></button>
       </div>
-      <p className="element__duration">{formatDuration(props.movie.duration)}</p>
+      <p className="element__duration">{formatDuration(movie.duration)}</p>
     </li>
   )
 }
