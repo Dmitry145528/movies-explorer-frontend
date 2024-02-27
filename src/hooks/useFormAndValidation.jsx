@@ -1,7 +1,7 @@
 import {useState, useCallback} from 'react';
 
 export function useFormAndValidation() {
-  const [ values, setValues ] = useState({});
+  const [ values, setValues ] = useState({ search: '' }); // Задаем начальное значение для search
   const [ errors, setErrors ] = useState({});
   const [ isValid, setIsValid ] = useState(false);
 
