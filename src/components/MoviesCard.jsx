@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import mainApi from '../utils/MainApi';
 
-function MoviesCard({ movie, likedMovies }) {
+function MoviesCard({ movie, likedMovies, setUpdate }) {
 
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
@@ -13,7 +13,7 @@ function MoviesCard({ movie, likedMovies }) {
   }, [location.pathname]);
 
   useEffect(() => {
-    setIsLiked(likedMovies.some((likedMovie) => likedMovie === movie.id));
+    setIsLiked(likedMovies.some((likedMovie) => likedMovie === movie.id ? movie.id : movie.movieId));
   }, []);
 
   // Функция для преобразования времени в формат "часы и минуты"
@@ -35,10 +35,12 @@ function MoviesCard({ movie, likedMovies }) {
       duration: movie.duration,
       year: movie.year,
       description: movie.description,
-      image: `https://api.nomoreparties.co${movie.image.url}`,
+      image: movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image,
       trailerLink: movie.trailerLink,
-      thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-      movieId: movie.id,
+      thumbnail: movie.image && movie.image.formats && movie.image.formats.thumbnail
+      ? `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
+      : movie.thumbnail,
+      movieId: movie.id ? movie.id : movie.movieId,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN,
     };
@@ -53,6 +55,7 @@ function MoviesCard({ movie, likedMovies }) {
       mainApi.deleteMovie(movieData.movieId)
         .then(() => {
           setIsLiked(false);
+          setUpdate(true);
         })
         .catch((err) => console.error('Ошибка при удалении фильма:', err));
     }
@@ -61,7 +64,7 @@ function MoviesCard({ movie, likedMovies }) {
   return (
     <li className="element" key={movie.id}>
       <a className="element__link" href={movie.trailerLink} rel="noreferrer noopener" target="_blank">
-        <img className="element__image" alt={movie.nameRU} src={`https://api.nomoreparties.co${movie.image.url}`} />
+        <img className="element__image" alt={movie.nameRU} src={movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image} />
       </a>
       <div className="element__pos-element">
         <h2 className="element__title">{movie.nameRU}</h2>

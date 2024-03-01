@@ -90,8 +90,12 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="signup" element={<Register handleLogin={handleLogin} />} />
             <Route path="signin" element={<Login handleLogin={handleLogin} />} />
-            <Route path="movies" element={<ProtectedRouteElement element={Movies} />} />
-            <Route path="saved-movies" element={<ProtectedRouteElement element={SavedMovies} />} />
+            <Route path="movies" element={<ProtectedRouteElement
+              element={Movies}
+            />} />
+            <Route path="saved-movies" element={<ProtectedRouteElement
+              element={SavedMovies}
+            />} />
             <Route path="profile" element={<ProtectedRouteElement
               element={Profile}
               handleLogin={handleLogin}

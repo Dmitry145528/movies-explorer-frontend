@@ -1,8 +1,8 @@
-function MoviesCardList(props) {
+function MoviesCardList({ movieItems }) {
   return (
     <section className="elements">
       <ul className="elements__grid-items">
-        {props.movieItems}
+        {movieItems}
       </ul>
     </section>
   )
