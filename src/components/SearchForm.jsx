@@ -1,11 +1,12 @@
 import SearchIcon from '../images/search-icon.svg'
 import FilterCheckBox from "./FilterCheckbox";
 
-function SearchForm({setIsSubmitted, onChange, value}) {
+function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
+    setIsInitialSubmitted(true);
   }
 
   return (

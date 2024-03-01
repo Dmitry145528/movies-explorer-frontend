@@ -5,54 +5,76 @@ import Preloader from './Preloader';
 import { useState, useEffect } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import moviesApi from '../utils/MoviesApi';
+import mainApi from '../utils/MainApi';
 
 function Movies() {
 
   const { values, handleChange } = useFormAndValidation();
 
+  const [initialMovies, setInitialMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [visibleMovies, setVisibleMovies] = useState(16);
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState('Нужно ввести ключевое слово');
+  const [isInitialSubmitted, setIsInitialSubmitted] = useState(false);
+  const [likedMovies, setLikedMovies] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (isInitialSubmitted) {
+      setLoading(true);
+      setError(null);
+
+      moviesApi.getInitialMovies()
+        .then((data) => {
+          setInitialMovies(data);
+          const filteredMovies = filterMovies(data, values.search);
+          setMovies(filteredMovies);
+        })
+        .catch((error) => {
+          console.error('Ошибка при запросе к API:', error);
+          setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+
+      mainApi.getLikedMovies()
+        .then((data) => {
+          setLikedMovies(data.map((movie) => movie.movieId));
+        })
+        .catch((err) => {
+          console.log("Ошибка при запросе сохранённых фильмов", err);
+        });
+    }
+  }, [isInitialSubmitted]);
 
   useEffect(() => {
     if (isSubmitted) {
-      const fetchMoviesData = () => {
-        setLoading(true);
-        setError(null); // Сброс ошибки перед новым запросом
-
-        if (!values.search.trim()) {
-          setLoading(false);
-          setError('Нужно ввести ключевое слово');
-          setIsSubmitted(false);
-          return
-        }
-
-        moviesApi.getInitialMovies()
-          .then((initialMovies) => {
-            // Фильтрация по имени (nameRU или nameEN) в зависимости от текущего языка
-            const filteredMovies = initialMovies.filter(movie => {
-              return (
-                movie.nameRU.toLowerCase().includes(values.search.toLowerCase()) ||
-                movie.nameEN.toLowerCase().includes(values.search.toLowerCase())
-              );
-            });
-
-            setMovies(filteredMovies);
-          })
-          .catch((error) => {
-            console.error('Ошибка при запросе к API:', error);
-            setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-          })
-          .finally(() => {
-            setLoading(false);
-            setIsSubmitted(false);
-          });
-      };
-      fetchMoviesData();
+      const filteredMovies = filterMovies(initialMovies, values.search);
+      setMovies(filteredMovies);
+      setIsSubmitted(false);
     }
   }, [isSubmitted]);
+
+  // Фильтрация по имени (nameRU или nameEN) в зависимости от текущего языка
+  function filterMovies(initialMovies, searchValue) {
+    const filteredMovies = searchValue.trim() !== ""
+      ? initialMovies.filter(movie => (
+        movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
+        movie.nameEN.toLowerCase().includes(searchValue.toLowerCase())
+      ))
+      : [];
+
+    // Проверка на пустой запрос и установка ошибки
+    if (searchValue.trim() === "" && isInitialSubmitted) {
+      setError('Нужно ввести ключевое слово');
+    } else {
+      setError('');
+    }
+
+    return filteredMovies;
+  }
 
   const handleShowMore = () => {
     setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 4);
@@ -60,10 +82,14 @@ function Movies() {
 
   return (
     <main className="content">
-      <SearchForm setIsSubmitted={setIsSubmitted} onChange={handleChange} value={values} />
+      <SearchForm
+        setIsSubmitted={setIsSubmitted}
+        onChange={handleChange}
+        setIsInitialSubmitted={setIsInitialSubmitted}
+        value={values} />
       {loading && !error && <Preloader />} {/* Показываем прелоадер только при загрузке и без ошибок */}
       {error && <p className="not-found__text not-found__result">{error}</p>} {/* Показываем сообщение об ошибке, если она произошла */}
-      {!loading && !error && movies.length === 0 && (
+      {!loading && !error && movies.length === 0 && isInitialSubmitted && (
         <p className="not-found__text not-found__result">По вашему запросу ничего не найдено!</p>
       )}
       {!loading && !error && movies.length > 0 && (
@@ -72,11 +98,12 @@ function Movies() {
             <MoviesCard
               key={movie.id}
               movie={movie}
+              likedMovies={likedMovies}
             />
           ))}
         />
       )}
-      {visibleMovies < movies.length && !loading && isSubmitted && (
+      {visibleMovies < movies.length && !loading && !isSubmitted && (
         <button className="elements__button" onClick={handleShowMore}>
           Ещё
         </button>

@@ -33,6 +33,30 @@ class MainApi {
       body: JSON.stringify({ name, email })
     });
   }
+
+  addMovie(movieData) {
+    return this.request(`${this._url}/movies`, {
+      credentials: "include",
+      headers: this._headers,
+      method: 'POST',
+      body: JSON.stringify(movieData)
+    });
+  }
+
+  deleteMovie(id) {
+    return this.request(`${this._url}/movies/${id}`, {
+      credentials: "include",
+      headers: this._headers,
+      method: 'DELETE',
+    });
+  }
+
+  getLikedMovies() {
+    return this.request(`${this._url}/movies`, {
+      credentials: "include",
+      headers: this._headers
+    });
+  }
 }
 
 const mainApi = new MainApi({
