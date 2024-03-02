@@ -13,11 +13,13 @@ function Movies() {
 
   const [initialMovies, setInitialMovies] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [prevResult, setPrevResult] = useState([]);
   const [visibleMovies, setVisibleMovies] = useState(16);
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInitialSubmitted, setIsInitialSubmitted] = useState(false);
   const [likedMovies, setLikedMovies] = useState([]);
+  const [shortFilm, setShortFilm] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function Movies() {
           setInitialMovies(data);
           const filteredMovies = filterMovies(data, values.search);
           setMovies(filteredMovies);
+          setPrevResult(filteredMovies);
         })
         .catch((error) => {
           console.error('Ошибка при запросе к API:', error);
@@ -53,16 +56,22 @@ function Movies() {
     if (isSubmitted) {
       const filteredMovies = filterMovies(initialMovies, values.search);
       setMovies(filteredMovies);
+      setPrevResult(filteredMovies);
       setIsSubmitted(false);
     }
   }, [isSubmitted]);
+
+  useEffect(() => {
+      const filteredShortMovies = filterShortMovies(movies, shortFilm);
+      setMovies(filteredShortMovies);
+  }, [shortFilm, prevResult]);
 
   // Фильтрация по имени (nameRU или nameEN) в зависимости от текущего языка
   function filterMovies(initialMovies, searchValue) {
     const filteredMovies = searchValue.trim() !== ""
       ? initialMovies.filter(movie => (
-        movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(searchValue.toLowerCase())
+        (movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(searchValue.toLowerCase()))
       ))
       : [];
 
@@ -76,6 +85,15 @@ function Movies() {
     return filteredMovies;
   }
 
+  // Фильтрация короткометражек
+  function filterShortMovies(movies, shortFilm) {
+    const filteredShortMovies = shortFilm
+      ? movies.filter(movie => movie.duration && movie.duration <= 40)
+      : prevResult;
+
+    return filteredShortMovies;
+  }
+
   const handleShowMore = () => {
     setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 4);
   };
@@ -86,7 +104,10 @@ function Movies() {
         setIsSubmitted={setIsSubmitted}
         onChange={handleChange}
         setIsInitialSubmitted={setIsInitialSubmitted}
-        value={values} />
+        value={values}
+        shortFilm={shortFilm}
+        setShortFilm={setShortFilm}
+      />
       {loading && !error && <Preloader />} {/* Показываем прелоадер только при загрузке и без ошибок */}
       {error && <p className="not-found__text not-found__result">{error}</p>} {/* Показываем сообщение об ошибке, если она произошла */}
       {!loading && !error && movies.length === 0 && isInitialSubmitted && (

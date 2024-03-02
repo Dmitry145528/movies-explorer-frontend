@@ -11,7 +11,10 @@ function SavedMovies() {
   const [visibleMovies, setVisibleMovies] = useState(16);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInitialSubmitted, setIsInitialSubmitted] = useState(false);
+  const [movies, setMovies] = useState([]);
   const [likedMovies, setLikedMovies] = useState([]);
+  const [prevResult, setPrevResult] = useState([]);
+  const [shortFilm, setShortFilm] = useState(false);
   const [error, setError] = useState('');
   const [update, setUpdate] = useState(false);
 
@@ -21,7 +24,8 @@ function SavedMovies() {
     mainApi.getLikedMovies()
       .then((data) => {
         setLikedMovies(data.map((movie) => movie));
-        setIsInitialSubmitted(true);
+        setPrevResult(data.map((movie) => movie));
+        setMovies(data.map((movie) => movie));
         setUpdate(false);
       })
       .catch((err) => {
@@ -29,33 +33,39 @@ function SavedMovies() {
       })
   }, [update]);
 
-  console.log(likedMovies);
-
   useEffect(() => {
     if (isSubmitted) {
       const filteredMovies = filterMovies(likedMovies, values.search);
       setLikedMovies(filteredMovies);
+      setPrevResult(filteredMovies);
       setIsSubmitted(false);
     }
   }, [isSubmitted]);
 
+  useEffect(() => {
+    const filteredShortMovies = filterShortMovies(likedMovies, shortFilm);
+    setLikedMovies(filteredShortMovies);
+  }, [shortFilm]);
+
   // Фильтрация по имени (nameRU или nameEN) в зависимости от текущего языка
-  function filterMovies(initialMovies, searchValue) {
-    const filteredMovies = searchValue.trim() !== ""
-      ? initialMovies.filter(movie => (
+  function filterMovies(likedMovies, searchValue) {
+    const filteredMovies = searchValue !== ""
+      ? likedMovies.filter(movie => (
         movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
         movie.nameEN.toLowerCase().includes(searchValue.toLowerCase())
       ))
-      : [];
-
-    // Проверка на пустой запрос и установка ошибки
-    if (searchValue.trim() === "" && isInitialSubmitted) {
-      setError('Нужно ввести ключевое слово');
-    } else {
-      setError('');
-    }
+      : movies;
 
     return filteredMovies;
+  }
+
+  // Фильтрация короткометражек
+  function filterShortMovies(likedMovies, shortFilm) {
+    const filteredShortMovies = shortFilm
+      ? likedMovies.filter(movie => movie.duration && movie.duration <= 40)
+      : prevResult;
+
+    return filteredShortMovies;
   }
 
   const handleShowMore = () => {
@@ -68,7 +78,10 @@ function SavedMovies() {
         setIsSubmitted={setIsSubmitted}
         onChange={handleChange}
         setIsInitialSubmitted={setIsInitialSubmitted}
-        value={values} />
+        value={values}
+        shortFilm={shortFilm}
+        setShortFilm={setShortFilm}
+      />
       {error && <p className="not-found__text not-found__result">{error}</p>} {/* Показываем сообщение об ошибке, если она произошла */}
       {!error && likedMovies.length === 0 && isInitialSubmitted && (
         <p className="not-found__text not-found__result">По вашему запросу ничего не найдено!</p>

@@ -1,7 +1,11 @@
-import SearchIcon from '../images/search-icon.svg'
+import SearchIcon from '../images/search-icon.svg';
 import FilterCheckBox from "./FilterCheckbox";
 
-function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted }) {
+function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted, shortFilm, setShortFilm }) {
+
+  const handleCheckboxChange = () => {
+    setShortFilm(!shortFilm);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,14 +35,18 @@ function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted }) 
         </form>
         <span className="search__line"></span>
         <div className="search__filter">
-          <FilterCheckBox />
+          <FilterCheckBox
+            handleCheckboxChange={handleCheckboxChange}
+            shortFilm={shortFilm}
+          />
         </div>
       </div>
       <div className="search__filter_mobile">
-        <FilterCheckBox />
+        <FilterCheckBox
+        />
       </div>
     </section>
   )
 }
 
-export default SearchForm
+export default SearchForm;
