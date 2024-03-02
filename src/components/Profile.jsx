@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
@@ -7,6 +7,16 @@ function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid } = useFormAndValidation();
 
+  const [isFormChanged, setIsFormChanged] = useState(false);
+
+  // Проверяем, изменились ли значения в форме
+  useEffect(() => {
+    const isNameChanged = values.name !== currentUser.name;
+    const isEmailChanged = values.email !== currentUser.email;
+
+    setIsFormChanged(isNameChanged || isEmailChanged);
+  }, [values, currentUser]);
+
   const handleEditClick = () => {
     props.editProfile(true);
   };
@@ -14,7 +24,7 @@ function Profile(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isValid) {
+    if (isValid && isFormChanged) {
 
       props.onUpdateUser({
         name: values.name,
@@ -72,7 +82,7 @@ function Profile(props) {
         {props.isEditing ? (
           <>
             <p className="auth__enter-error">{props.error}</p>
-            <button type="button" className={`auth__button ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью Сохранить`} onClick={handleSubmit} disabled={!isValid}>{"Сохранить"}</button>
+            <button type="button" className={`auth__button ${isValid && isFormChanged ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью Сохранить`} onClick={handleSubmit} disabled={!isValid}>{"Сохранить"}</button>
           </>
         ) : (
           <button type="button" className="profile__button" onClick={handleEditClick} aria-label={`Кнопка с надписью редактировать`}>
@@ -85,4 +95,4 @@ function Profile(props) {
   )
 }
 
-export default Profile
+export default Profile;

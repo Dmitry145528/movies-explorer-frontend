@@ -72,6 +72,7 @@ function App() {
       .then((newUserData) => {
         setCurrentUser(newUserData);
         setIsEditing(false);
+        alert('Данные успешно обновлены');
         setError('');
       })
       .catch((err) => {
