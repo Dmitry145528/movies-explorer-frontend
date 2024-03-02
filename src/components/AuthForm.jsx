@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom"
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 import { useState, useEffect } from "react"
 
-function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error }) {
+function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error}) {
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
   const location = useLocation();
@@ -71,6 +71,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error }) {
               className={`auth__input ${errors.email ? 'auth__input_error' : ''}`}
               maxLength="37"
               placeholder="Введите E-mail"
+              pattern='[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}'
               required
             />
             <span className="auth__input-error">{errors.email}</span>

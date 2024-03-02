@@ -63,6 +63,7 @@ function Profile(props) {
               className={`auth__input profile__input ${errors.email ? 'auth__input_error' : ''}`}
               maxLength="35"
               placeholder={currentUser.email}
+              pattern='[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}'
               required
               disabled={!props.isEditing} // Делаем поле неактивным при просмотре
             />

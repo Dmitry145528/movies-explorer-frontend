@@ -43,6 +43,8 @@ function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted, sh
       </div>
       <div className="search__filter_mobile">
         <FilterCheckBox
+        handleCheckboxChange={handleCheckboxChange}
+        shortFilm={shortFilm}
         />
       </div>
     </section>
