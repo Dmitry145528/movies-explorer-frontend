@@ -14,7 +14,7 @@ function Movies() {
   const [initialMovies, setInitialMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [prevResult, setPrevResult] = useState([]);
-  const [visibleMovies, setVisibleMovies] = useState(16);
+  const [visibleMovies, setVisibleMovies] = useState(getVisibleMovies());
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInitialSubmitted, setIsInitialSubmitted] = useState(false);
@@ -41,7 +41,11 @@ function Movies() {
         .finally(() => {
           setLoading(false);
         });
+    }
+  }, [isInitialSubmitted]);
 
+  useEffect(() => {
+    if (isSubmitted) {
       mainApi.getLikedMovies()
         .then((data) => {
           setLikedMovies(data.map((movie) => movie.movieId));
@@ -50,7 +54,7 @@ function Movies() {
           console.log("Ошибка при запросе сохранённых фильмов", err);
         });
     }
-  }, [isInitialSubmitted]);
+  }, [isSubmitted]);
 
   useEffect(() => {
     if (isSubmitted) {
@@ -58,12 +62,13 @@ function Movies() {
       setMovies(filteredMovies);
       setPrevResult(filteredMovies);
       setIsSubmitted(false);
+      setVisibleMovies(getVisibleMovies());
     }
   }, [isSubmitted]);
 
   useEffect(() => {
-      const filteredShortMovies = filterShortMovies(movies, shortFilm);
-      setMovies(filteredShortMovies);
+    const filteredShortMovies = filterShortMovies(movies, shortFilm);
+    setMovies(filteredShortMovies);
   }, [shortFilm, prevResult]);
 
   // Фильтрация по имени (nameRU или nameEN) в зависимости от текущего языка
@@ -94,9 +99,50 @@ function Movies() {
     return filteredShortMovies;
   }
 
+  function getVisibleMovies() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth > 1199) {
+      return 16;
+    } else if (screenWidth >= 930) {
+      return 12;
+    } else if (screenWidth >= 590) {
+      return 8;
+    } else {
+      return 5;
+    }
+  }
+
+  function getCardsToAdd() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth > 1199) {
+      return 4;
+    } else if (screenWidth >= 930) {
+      return 3;
+    } else if (screenWidth >= 590 && screenWidth <= 929) {
+      return 2;
+    } else {
+      return 2;
+    }
+  }
+
   const handleShowMore = () => {
-    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 4);
+    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + getCardsToAdd());
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Используйте setTimeout, чтобы уменьшить частоту обновлений при изменении размера окна
+      setTimeout(() => {
+        setVisibleMovies(getVisibleMovies());
+      }, 200);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <main className="content">

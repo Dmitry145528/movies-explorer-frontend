@@ -14,7 +14,7 @@ function MoviesCard({ movie, likedMovies, setUpdate }) {
 
   useEffect(() => {
     setIsLiked(likedMovies.some((likedMovie) => likedMovie === movie.id ? movie.id : movie.movieId));
-  }, []);
+  }, [likedMovies.length]);
 
   // Функция для преобразования времени в формат "часы и минуты"
   const formatDuration = (minutes) => {
