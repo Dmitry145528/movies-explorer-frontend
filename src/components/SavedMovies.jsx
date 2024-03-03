@@ -8,7 +8,6 @@ import mainApi from '../utils/MainApi';
 function SavedMovies() {
   const { values, handleChange } = useFormAndValidation();
 
-  const [visibleMovies, setVisibleMovies] = useState(16);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInitialSubmitted, setIsInitialSubmitted] = useState(false);
   const [movies, setMovies] = useState([]);
@@ -68,10 +67,6 @@ function SavedMovies() {
     return filteredShortMovies;
   }
 
-  const handleShowMore = () => {
-    setVisibleMovies(prevVisibleMovies => prevVisibleMovies + 4);
-  };
-
   return (
     <main className="content">
       <SearchForm
@@ -88,7 +83,7 @@ function SavedMovies() {
       )}
       {!error && likedMovies.length > 0 && (
         <MoviesCardList
-          movieItems={!isSubmitted && likedMovies.slice(0, visibleMovies).map(movie => (
+          movieItems={!isSubmitted && likedMovies.map(movie => (
             <MoviesCard
               key={movie.movieId}
               movie={movie}
@@ -97,11 +92,6 @@ function SavedMovies() {
             />
           ))}
         />
-      )}
-      {visibleMovies < likedMovies.length && !isSubmitted && (
-        <button className="elements__button" onClick={handleShowMore}>
-          Ещё
-        </button>
       )}
     </main>
   );
