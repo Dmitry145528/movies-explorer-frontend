@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom"
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 import { useState, useEffect } from "react"
 
-function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error}) {
+function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
   const location = useLocation();
