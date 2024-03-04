@@ -19,10 +19,12 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const loggedInStorage = localStorage.getItem('loggedIn');
+
   const [currentPath, setCurrentPath] = useState(location.pathname);
   const [currentUser, setCurrentUser] = useState('');
   const [error, setError] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(loggedInStorage);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -47,6 +49,7 @@ function App() {
   }, [loggedIn]);
 
   const handleLogin = (status) => {
+    localStorage.setItem('loggedIn', loggedIn);
     setLoggedIn(status);
   }
 
@@ -60,6 +63,7 @@ function App() {
         localStorage.removeItem('userId');
         localStorage.removeItem('searchQuery');
         localStorage.removeItem('shortFilm');
+        localStorage.removeItem('loggedIn');
         localStorage.removeItem('movies');
         handleLogin(false);
         navigate('/', { replace: true });

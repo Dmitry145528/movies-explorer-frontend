@@ -38,8 +38,8 @@ function MoviesCard({ movie, likedMovies, setUpdate }) {
       image: movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image,
       trailerLink: movie.trailerLink,
       thumbnail: movie.image && movie.image.formats && movie.image.formats.thumbnail
-      ? `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
-      : movie.thumbnail,
+        ? `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
+        : movie.thumbnail,
       movieId: movie.id ? movie.id : movie.movieId,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN,
@@ -55,7 +55,9 @@ function MoviesCard({ movie, likedMovies, setUpdate }) {
       mainApi.deleteMovie(movieData.movieId)
         .then(() => {
           setIsLiked(false);
-          setUpdate(true);
+          if (currentPath === '/saved-movies') {
+            setUpdate(true);
+          }
         })
         .catch((err) => console.error('Ошибка при удалении фильма:', err));
     }

@@ -18,17 +18,18 @@ function SavedMovies() {
 
   useEffect(() => {
     setError(null);
-
-    mainApi.getLikedMovies()
-      .then((data) => {
-        setLikedMovies(data.map((movie) => movie));
-        setPrevResult(data.map((movie) => movie));
-        setMovies(data.map((movie) => movie));
-        setUpdate(false);
-      })
-      .catch((err) => {
-        console.log("Ошибка при запросе сохранённых фильмов", err);
-      })
+    if (!update) {
+      mainApi.getLikedMovies()
+        .then((data) => {
+          setLikedMovies(data.map((movie) => movie));
+          setPrevResult(data.map((movie) => movie));
+          setMovies(data.map((movie) => movie));
+        })
+        .catch((err) => {
+          console.log("Ошибка при запросе сохранённых фильмов", err);
+        })
+    }
+    setUpdate(false);
   }, [update]);
 
   useEffect(() => {
@@ -93,6 +94,7 @@ function SavedMovies() {
               movie={movie}
               likedMovies={likedMovies}
               setUpdate={setUpdate}
+              setLikedMovies={setLikedMovies}
             />
           ))}
         />
