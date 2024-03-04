@@ -23,7 +23,7 @@ function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted, sh
               id="search"
               name="search"
               type="text"
-              value={value.name}
+              value={value}
               onChange={onChange}
               className='search__input'
               placeholder="Фильм"

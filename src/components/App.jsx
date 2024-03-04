@@ -58,6 +58,9 @@ function App() {
     onLogout().then((res) => {
       if (res) {
         localStorage.removeItem('userId');
+        localStorage.removeItem('searchQuery');
+        localStorage.removeItem('shortFilm');
+        localStorage.removeItem('movies');
         handleLogin(false);
         navigate('/', { replace: true });
       }

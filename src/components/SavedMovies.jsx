@@ -1,13 +1,12 @@
-import SearchForm from './SearchForm';
+import SearchSavedMovies from './SearchSavedMovies';
 import MoviesCardList from './MoviesCardList';
 import MoviesCard from './MoviesCard';
 import { useState, useEffect } from 'react';
-import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import mainApi from '../utils/MainApi';
 
 function SavedMovies() {
-  const { values, handleChange } = useFormAndValidation();
 
+  const [values, setValues] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInitialSubmitted, setIsInitialSubmitted] = useState(false);
   const [movies, setMovies] = useState([]);
@@ -34,7 +33,7 @@ function SavedMovies() {
 
   useEffect(() => {
     if (isSubmitted) {
-      const filteredMovies = filterMovies(likedMovies, values.search);
+      const filteredMovies = filterMovies(likedMovies, values);
       setLikedMovies(filteredMovies);
       setPrevResult(filteredMovies);
       setIsSubmitted(false);
@@ -45,6 +44,11 @@ function SavedMovies() {
     const filteredShortMovies = filterShortMovies(likedMovies, shortFilm);
     setLikedMovies(filteredShortMovies);
   }, [shortFilm]);
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setValues(value);
+  }
 
   // Фильтрация по имени (nameRU или nameEN) в зависимости от текущего языка
   function filterMovies(likedMovies, searchValue) {
@@ -69,7 +73,7 @@ function SavedMovies() {
 
   return (
     <main className="content">
-      <SearchForm
+      <SearchSavedMovies
         setIsSubmitted={setIsSubmitted}
         onChange={handleChange}
         setIsInitialSubmitted={setIsInitialSubmitted}
@@ -77,7 +81,7 @@ function SavedMovies() {
         shortFilm={shortFilm}
         setShortFilm={setShortFilm}
       />
-      {error && <p className="not-found__text not-found__result">{error}</p>} {/* Показываем сообщение об ошибке, если она произошла */}
+      {error && <p className="not-found__text not-found__result">{error}</p>}
       {!error && likedMovies.length === 0 && isInitialSubmitted && (
         <p className="not-found__text not-found__result">По вашему запросу ничего не найдено!</p>
       )}

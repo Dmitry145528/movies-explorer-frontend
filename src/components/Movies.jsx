@@ -1,16 +1,14 @@
-import SearchForm from './SearchForm';
+import SearchMovies from './SearchMovies';
 import MoviesCardList from './MoviesCardList';
 import MoviesCard from './MoviesCard';
 import Preloader from './Preloader';
 import { useState, useEffect } from 'react';
-import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import moviesApi from '../utils/MoviesApi';
 import mainApi from '../utils/MainApi';
 
 function Movies() {
 
-  const { values, handleChange } = useFormAndValidation();
-
+  const [values, setValues] = useState('');
   const [initialMovies, setInitialMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [prevResult, setPrevResult] = useState([]);
@@ -30,7 +28,7 @@ function Movies() {
       moviesApi.getInitialMovies()
         .then((data) => {
           setInitialMovies(data);
-          const filteredMovies = filterMovies(data, values.search);
+          const filteredMovies = filterMovies(data, values);
           setMovies(filteredMovies);
           setPrevResult(filteredMovies);
         })
@@ -58,7 +56,7 @@ function Movies() {
 
   useEffect(() => {
     if (isSubmitted) {
-      const filteredMovies = filterMovies(initialMovies, values.search);
+      const filteredMovies = filterMovies(initialMovies, values);
       setMovies(filteredMovies);
       setPrevResult(filteredMovies);
       setIsSubmitted(false);
@@ -71,9 +69,44 @@ function Movies() {
     setMovies(filteredShortMovies);
   }, [shortFilm, prevResult]);
 
+  useEffect(() => {
+    if (isSubmitted) {
+      localStorage.setItem('searchQuery', values);
+      localStorage.setItem('movies', JSON.stringify(movies));
+      localStorage.setItem('shortFilm', shortFilm);
+    }
+  }, [isSubmitted, shortFilm, values])
+
+  useEffect(() => {
+    // Наличие данных в локальном хранилище
+    const storedQuery = localStorage.getItem('searchQuery');
+    const storedShortFilm = localStorage.getItem('shortFilm');
+    const storedMovies = localStorage.getItem('movies');
+
+    // Состояние на основе данных из локального хранилища
+    if (storedQuery) {
+      handleChange({ target: { name: 'search', value: storedQuery } });
+      setIsSubmitted(true);
+      setIsInitialSubmitted(true);
+    }
+
+    if (storedShortFilm) {
+      setShortFilm(JSON.parse(storedShortFilm));
+    }
+
+    if (storedMovies) {
+      setMovies(JSON.parse(storedMovies));
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setValues(value);
+  }
+
   // Фильтрация по имени (nameRU или nameEN) в зависимости от текущего языка
   function filterMovies(initialMovies, searchValue) {
-    const filteredMovies = searchValue.trim() !== ""
+    const filteredMovies = searchValue !== ""
       ? initialMovies.filter(movie => (
         (movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
           movie.nameEN.toLowerCase().includes(searchValue.toLowerCase()))
@@ -81,7 +114,7 @@ function Movies() {
       : [];
 
     // Проверка на пустой запрос и установка ошибки
-    if (searchValue.trim() === "" && isInitialSubmitted) {
+    if (searchValue === "" && isInitialSubmitted) {
       setError('Нужно ввести ключевое слово');
     } else {
       setError('');
@@ -131,7 +164,6 @@ function Movies() {
 
   useEffect(() => {
     const handleResize = () => {
-      // Используйте setTimeout, чтобы уменьшить частоту обновлений при изменении размера окна
       setTimeout(() => {
         setVisibleMovies(getVisibleMovies());
       }, 200);
@@ -146,7 +178,7 @@ function Movies() {
 
   return (
     <main className="content">
-      <SearchForm
+      <SearchMovies
         setIsSubmitted={setIsSubmitted}
         onChange={handleChange}
         setIsInitialSubmitted={setIsInitialSubmitted}
@@ -154,8 +186,8 @@ function Movies() {
         shortFilm={shortFilm}
         setShortFilm={setShortFilm}
       />
-      {loading && !error && <Preloader />} {/* Показываем прелоадер только при загрузке и без ошибок */}
-      {error && <p className="not-found__text not-found__result">{error}</p>} {/* Показываем сообщение об ошибке, если она произошла */}
+      {loading && !error && <Preloader />}
+      {error && <p className="not-found__text not-found__result">{error}</p>}
       {!loading && !error && movies.length === 0 && isInitialSubmitted && (
         <p className="not-found__text not-found__result">По вашему запросу ничего не найдено!</p>
       )}
