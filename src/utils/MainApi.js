@@ -60,7 +60,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  url: 'http://localhost:3000',
+  url: 'https://api.project-movies.nomoredomainswork.ru',
   headers: {
     'Content-Type': 'application/json'
   }
