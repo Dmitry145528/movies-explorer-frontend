@@ -25,7 +25,7 @@
 ### Ссылка на макет: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/Дипломный-проект?type=design&node-id=1-6015&mode=design&t=m02vP9G3Pn0kaWv4-0
 
 ## Адрес сайта: 
-### Ссылка на сайт: https://api.project-movies.nomoredomainswork.ru
+### Ссылка на сайт: https://project-movies.nomoredomainswork.ru
 
 Проект "Movie Explorer" разработан с использованием Vite + React. Для запуска приложения в режиме разработки и сборки предусмотрены следующие команды:
 

@@ -27,8 +27,8 @@ class MainApi {
 
   setProfileInfo({ name, email }) {
     return this.request(`${this._url}/users/me`, {
-      method: 'PATCH',
       credentials: "include",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ name, email })
     });
