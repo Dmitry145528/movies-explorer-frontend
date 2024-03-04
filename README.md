@@ -24,6 +24,9 @@
 ## Макет: dark-1
 ### Ссылка на макет: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/Дипломный-проект?type=design&node-id=1-6015&mode=design&t=m02vP9G3Pn0kaWv4-0
 
+## Pull request: 
+### Ссылка на Pull request: https://github.com/Dmitry145528/movies-explorer-frontend/compare/level-3?expand=1
+
 ## Адрес сайта: 
 ### Ссылка на сайт: https://project-movies.nomoredomainswork.ru
 
