@@ -14,9 +14,12 @@ function SavedMovies() {
   const [prevResult, setPrevResult] = useState([]);
   const [shortFilm, setShortFilm] = useState(false);
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // Ограничитель запросов
 
   useEffect(() => {
-      setError(null);
+    setError(null);
+    if (!isSubmitting) {
+      setIsSubmitting(true);
       mainApi.getLikedMovies()
         .then((data) => {
           setLikedMovies(data.map((movie) => movie));
@@ -26,6 +29,10 @@ function SavedMovies() {
         .catch((err) => {
           console.log("Ошибка при запросе сохранённых фильмов", err);
         })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    }
   }, []);
 
   const handleCardDelete = (deletedMovieId) => {
@@ -87,6 +94,7 @@ function SavedMovies() {
         value={values}
         shortFilm={shortFilm}
         setShortFilm={setShortFilm}
+        isSubmitting={isSubmitting}
       />
       {error && <p className="not-found__text not-found__result">{error}</p>}
       {!error && likedMovies.length === 0 && isInitialSubmitted && (

@@ -2,31 +2,36 @@ import { useState, useContext, useEffect } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
-function Profile(props) {
+function Profile({ onUpdateUser, editProfile, isSubmitting, isEditing, error, onSignOut }) {
 
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, setValues } = useFormAndValidation();
 
   const [isFormChanged, setIsFormChanged] = useState(false);
 
-  // Проверяем, изменились ли значения в форме
+  useEffect(() => {
+    if (currentUser.name && currentUser.email) {
+      setValues({ name: currentUser.name, email: currentUser.email });
+    }
+  }, [currentUser, isEditing]);
+
   useEffect(() => {
     const isNameChanged = values.name !== currentUser.name;
     const isEmailChanged = values.email !== currentUser.email;
 
     setIsFormChanged(isNameChanged && isEmailChanged);
-  }, [values, currentUser]);
+  }, [values]);
 
   const handleEditClick = () => {
-    props.editProfile(true);
+    editProfile(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isValid && isFormChanged) {
+    if (isValid && isFormChanged && !isSubmitting) {
 
-      props.onUpdateUser({
+      onUpdateUser({
         name: values.name,
         email: values.email,
       })
@@ -49,13 +54,13 @@ function Profile(props) {
               id="name"
               name="name"
               type="text"
-              value={values.name || currentUser.name}
+              value={values.name || ''}
               onChange={handleChange}
               className={`auth__input profile__input ${errors.name ? 'auth__input_error' : ''}`}
               maxLength="30"
               minLength="2"
               required
-              disabled={!props.isEditing} // Делаем поле неактивным при просмотре
+              disabled={!isEditing} // Делаем поле неактивным при просмотре
             />
           </div>
           <span className="profile__contact-info_line"></span>
@@ -67,19 +72,19 @@ function Profile(props) {
               id="email"
               name="email"
               type="email"
-              value={values.email || currentUser.email}
+              value={values.email || ''}
               onChange={handleChange}
               className={`auth__input profile__input ${errors.email ? 'auth__input_error' : ''}`}
               maxLength="35"
               pattern='[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}'
               required
-              disabled={!props.isEditing} // Делаем поле неактивным при просмотре
+              disabled={!isEditing} // Делаем поле неактивным при просмотре
             />
           </div>
         </fieldset>
-        {props.isEditing ? (
+        {isEditing ? (
           <>
-            <p className="auth__enter-error">{props.error}</p>
+            <p className="auth__enter-error">{error}</p>
             <button type="button" className={`auth__button ${isValid && isFormChanged ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью Сохранить`} onClick={handleSubmit} disabled={!isValid}>{"Сохранить"}</button>
           </>
         ) : (
@@ -88,7 +93,7 @@ function Profile(props) {
           </button>
         )}
       </form>
-      {!props.isEditing ? (<button className="auth__caption-link profile__caption-link" onClick={props.onSignOut}>{"Выйти из аккаунта"}</button>) : ('')}
+      {!isEditing ? (<button className="auth__caption-link profile__caption-link" onClick={onSignOut}>{"Выйти из аккаунта"}</button>) : ('')}
     </main >
   )
 }

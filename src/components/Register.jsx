@@ -8,9 +8,12 @@ function Register(props) {
 
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (formValue) => {
-    if (formValue.password && formValue.email && formValue.name) {
+    if (!isSubmitting && formValue.password && formValue.email && formValue.name) {
+      setIsSubmitting(true); // блокируем форму при начале отправки запроса
+
       const { password, email, name } = formValue;
       Auth.register(password, email, name)
         .then((data) => {
@@ -27,6 +30,9 @@ function Register(props) {
         .catch((err) => {
           setError(err.status === 409 ? err.error.message : 'При регистрации пользователя произошла ошибка.');
           console.error('Ошибка при запросе регистрации:', err.error.message);
+        })
+        .finally(() => {
+          setIsSubmitting(false); // разблокируем форму после завершения запроса
         });
     }
   }
@@ -39,6 +45,7 @@ function Register(props) {
       linkText="Уже зарегистрированы?"
       linkTo="/signin"
       error={error}
+      isSubmitting={isSubmitting}
     />
   );
 }

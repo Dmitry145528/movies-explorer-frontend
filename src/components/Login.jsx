@@ -8,9 +8,12 @@ function Login(props) {
 
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (formValue) => {
-    if (formValue.password && formValue.email) {
+    if (!isSubmitting && formValue.password && formValue.email) {
+      setIsSubmitting(true); // блокируем форму при начале отправки запроса
+
       const { password, email } = formValue;
       Auth.onLogin(password, email)
         .then((data) => {
@@ -27,6 +30,9 @@ function Login(props) {
         .catch(err => {
           setError(err.status === 401 ? err.error.message : 'При авторизации произошла ошибка.');
           console.error('Ошибка при запросе авторизации:', err.error.message);
+        })
+        .finally(() => {
+          setIsSubmitting(false); // разблокируем форму после завершения запроса
         });
     }
   }
@@ -39,8 +45,9 @@ function Login(props) {
       linkText="Ещё не зарегистрированы?"
       linkTo="/signup"
       error={error}
+      isSubmitting={isSubmitting}
     />
   );
 }
 
-export default Login
+export default Login;

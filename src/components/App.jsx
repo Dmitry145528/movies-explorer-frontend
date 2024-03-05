@@ -26,6 +26,7 @@ function App() {
   const [error, setError] = useState('');
   const [loggedIn, setLoggedIn] = useState(loggedInStorage);
   const [isEditing, setIsEditing] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -85,18 +86,24 @@ function App() {
   }
 
   const handleUpdateUser = (userData) => {
-    return mainApi.setProfileInfo(userData)
-      .then((newUserData) => {
-        setCurrentUser(newUserData);
-        setIsEditing(false);
-        alert('Данные успешно обновлены');
-        setError('');
-      })
-      .catch((err) => {
-        setError(err.status === 409 ? err.error.message : 'При обновлении профиля произошла ошибка.');
-        setIsEditing(true);
-        console.error(err.error.message);
-      });
+    if (!isSubmitting) {
+      setIsSubmitting(true); // блокируем форму при начале отправки запроса
+      return mainApi.setProfileInfo(userData)
+        .then((newUserData) => {
+          setCurrentUser(newUserData);
+          setIsEditing(false);
+          alert('Данные успешно обновлены');
+          setError('');
+        })
+        .catch((err) => {
+          setError(err.status === 409 ? err.error.message : 'При обновлении профиля произошла ошибка.');
+          setIsEditing(true);
+          console.error(err.error.message);
+        })
+        .finally(() => {
+          setIsSubmitting(false); // разблокируем форму после завершения запроса
+        });
+    }
   }
 
   return (
@@ -118,6 +125,7 @@ function App() {
               isEditing={isEditing}
               editProfile={editProfile}
               error={error}
+              isSubmitting={isSubmitting}
             />}
             />
             <Route path="*" element={<NotFound />} />

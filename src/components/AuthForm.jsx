@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom"
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 import { useState, useEffect } from "react"
 
-function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error }) {
+function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error, isSubmitting }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
   const location = useLocation();
@@ -16,7 +16,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isValid) {
+    if (!isSubmitting && isValid) {
       onSubmit(values);
     } else {
       console.log('Форма невалидна, отправка данных отклонена.');

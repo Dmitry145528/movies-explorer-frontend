@@ -1,7 +1,7 @@
 import SearchIcon from '../images/search-icon.svg';
 import FilterCheckBox from "./FilterCheckbox";
 
-function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted, shortFilm, setShortFilm }) {
+function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted, shortFilm, setShortFilm, isSubmitting }) {
 
   const handleCheckboxChange = () => {
     setShortFilm(!shortFilm);
@@ -9,8 +9,10 @@ function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted, sh
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!isSubmitting){
     setIsSubmitted(true);
     setIsInitialSubmitted(true);
+    }
   }
 
   return (

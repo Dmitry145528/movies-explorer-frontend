@@ -19,6 +19,7 @@ function Movies() {
   const [likedMovies, setLikedMovies] = useState([]);
   const [shortFilm, setShortFilm] = useState(false);
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // Ограничитель запросов
 
   useEffect(() => {
     if (isInitialSubmitted) {
@@ -35,35 +36,41 @@ function Movies() {
         setPrevResult(filteredMovies);
         setLoading(false);
       } else {
-        setLoading(true);
-        // В противном случае, выполняем запрос к API
-        moviesApi.getInitialMovies()
-          .then((data) => {
-            setInitialMovies(data);
-            localStorage.setItem('movies', JSON.stringify(data));
-            const filteredMovies = filterMovies(data, values);
-            setMovies(filteredMovies);
-            setPrevResult(filteredMovies);
-          })
-          .catch((error) => {
-            console.error('Ошибка при запросе к API:', error);
-            setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-          })
-          .finally(() => {
-            setLoading(false);
-          });
+        if (!isSubmitting) {
+          setLoading(true);
+          setIsSubmitting(true);
+          // В противном случае, выполняем запрос к API
+          moviesApi.getInitialMovies()
+            .then((data) => {
+              setInitialMovies(data);
+              localStorage.setItem('movies', JSON.stringify(data));
+              const filteredMovies = filterMovies(data, values);
+              setMovies(filteredMovies);
+              setPrevResult(filteredMovies);
+            })
+            .catch((error) => {
+              console.error('Ошибка при запросе к API:', error);
+              setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+            })
+            .finally(() => {
+              setLoading(false);
+              setIsSubmitting(false);
+            });
+        }
       }
     }
   }, [isSubmitted]);
 
   useEffect(() => {
-    mainApi.getLikedMovies()
-      .then((data) => {
-        setLikedMovies(data.map((movie) => movie.movieId));
-      })
-      .catch((err) => {
-        console.log("Ошибка при запросе сохранённых фильмов", err);
-      });
+    if (isSubmitted) {
+      mainApi.getLikedMovies()
+        .then((data) => {
+          setLikedMovies(data.map((movie) => movie.movieId));
+        })
+        .catch((err) => {
+          console.log("Ошибка при запросе сохранённых фильмов", err);
+        });
+    }
   }, [isSubmitted]);
 
   useEffect(() => {
@@ -177,6 +184,7 @@ function Movies() {
         value={values}
         shortFilm={shortFilm}
         setShortFilm={setShortFilm}
+        isSubmitting={isSubmitting}
       />
       {loading && !error && <Preloader />}
       {error && <p className="not-found__text not-found__result">{error}</p>}

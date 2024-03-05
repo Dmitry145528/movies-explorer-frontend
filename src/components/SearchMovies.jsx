@@ -1,6 +1,6 @@
 import SearchForm from "./SearchForm";
 
-function SearchMovies({ setIsSubmitted, onChange, value, setIsInitialSubmitted, shortFilm, setShortFilm }) {
+function SearchMovies({ setIsSubmitted, onChange, value, setIsInitialSubmitted, shortFilm, setShortFilm, isSubmitting }) {
 
   return (
     <SearchForm
@@ -10,6 +10,7 @@ function SearchMovies({ setIsSubmitted, onChange, value, setIsInitialSubmitted, 
       value={value}
       shortFilm={shortFilm}
       setShortFilm={setShortFilm}
+      isSubmitting={isSubmitting}
     />
   )
 }
