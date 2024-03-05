@@ -4,7 +4,13 @@ function NotFound() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1); // Переход на предыдущую страницу в истории
+    if (window.history.length > 1) {
+      // Если есть предыдущая страница в истории, вернуться на неё
+      navigate(-1);
+    } else {
+      // Если нет предыдущей страницы, перейти на главную страницу
+      navigate('/');
+    }
   };
   
   return (
@@ -16,4 +22,4 @@ function NotFound() {
   )
 }
 
-export default NotFound
+export default NotFound;

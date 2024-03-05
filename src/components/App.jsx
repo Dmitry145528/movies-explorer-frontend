@@ -60,7 +60,7 @@ function App() {
   }, []);
 
   const handleLogin = (status) => {
-    localStorage.setItem('loggedIn', loggedIn);
+    localStorage.setItem('loggedIn', status);
     setLoggedIn(status);
   }
 
