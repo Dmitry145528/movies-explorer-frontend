@@ -27,8 +27,6 @@ function MoviesCard({ movie, likedMovies, onDelete }) {
     return formattedDuration.trim(); // Убираем лишние пробелы
   };
 
-  console.log(likedMovies);
-
   const handleCardLike = () => {
 
     const movieData = {

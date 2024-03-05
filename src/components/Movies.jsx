@@ -22,25 +22,39 @@ function Movies() {
 
   useEffect(() => {
     if (isInitialSubmitted) {
-      setLoading(true);
       setError(null);
 
-      moviesApi.getInitialMovies()
-        .then((data) => {
-          setInitialMovies(data);
-          const filteredMovies = filterMovies(data, values);
-          setMovies(filteredMovies);
-          setPrevResult(filteredMovies);
-        })
-        .catch((error) => {
-          console.error('Ошибка при запросе к API:', error);
-          setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      const storedMovies = localStorage.getItem('movies');
+
+      if (storedMovies) {
+        // Если данные есть в локальном хранилище, используем их
+        const parsedMovies = JSON.parse(storedMovies);
+        setInitialMovies(parsedMovies);
+        const filteredMovies = filterMovies(parsedMovies, values);
+        setMovies(filteredMovies);
+        setPrevResult(filteredMovies);
+        setLoading(false);
+      } else {
+        setLoading(true);
+        // В противном случае, выполните запрос к API
+        moviesApi.getInitialMovies()
+          .then((data) => {
+            setInitialMovies(data);
+            localStorage.setItem('movies', JSON.stringify(data));
+            const filteredMovies = filterMovies(data, values);
+            setMovies(filteredMovies);
+            setPrevResult(filteredMovies);
+          })
+          .catch((error) => {
+            console.error('Ошибка при запросе к API:', error);
+            setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
     }
-  }, [isInitialSubmitted]);
+  }, [isSubmitted]);
 
   useEffect(() => {
     mainApi.getLikedMovies()
@@ -50,7 +64,7 @@ function Movies() {
       .catch((err) => {
         console.log("Ошибка при запросе сохранённых фильмов", err);
       });
-  }, []);
+  }, [isSubmitted]);
 
   useEffect(() => {
     if (isSubmitted) {
@@ -70,7 +84,6 @@ function Movies() {
   useEffect(() => {
     if (isSubmitted) {
       localStorage.setItem('searchQuery', values);
-      localStorage.setItem('movies', JSON.stringify(movies));
       localStorage.setItem('shortFilm', shortFilm);
     }
   }, [isSubmitted, shortFilm, values])
@@ -79,7 +92,6 @@ function Movies() {
     // Наличие данных в локальном хранилище
     const storedQuery = localStorage.getItem('searchQuery');
     const storedShortFilm = localStorage.getItem('shortFilm');
-    const storedMovies = localStorage.getItem('movies');
 
     // Состояние на основе данных из локального хранилища
     if (storedQuery) {
@@ -90,10 +102,6 @@ function Movies() {
 
     if (storedShortFilm) {
       setShortFilm(JSON.parse(storedShortFilm));
-    }
-
-    if (storedMovies) {
-      setMovies(JSON.parse(storedMovies));
     }
   }, []);
 
