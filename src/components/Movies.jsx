@@ -36,7 +36,7 @@ function Movies() {
         setLoading(false);
       } else {
         setLoading(true);
-        // В противном случае, выполните запрос к API
+        // В противном случае, выполняем запрос к API
         moviesApi.getInitialMovies()
           .then((data) => {
             setInitialMovies(data);
@@ -167,20 +167,6 @@ function Movies() {
   const handleShowMore = () => {
     setVisibleMovies(prevVisibleMovies => prevVisibleMovies + getCardsToAdd());
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setTimeout(() => {
-        setVisibleMovies(getVisibleMovies());
-      }, 200);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <main className="content">

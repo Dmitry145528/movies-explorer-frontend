@@ -6,6 +6,9 @@
   font-size: 14px;
   color: #4285f4;
   transition: opacity 0.3s ease-in-out;
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 @media screen and (min-width: 930px) {

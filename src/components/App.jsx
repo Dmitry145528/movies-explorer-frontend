@@ -35,18 +35,28 @@ function App() {
     const userId = localStorage.getItem('userId');
 
     if (userId) {
-      // проверим есть ли ID  в локальном хранилище
+
+      if (currentPath.endsWith('/signup') || currentPath.endsWith('/signin')) {
+        navigate(navigate(-1), { replace: true });
+        return;
+      }
+    }
+  }, [navigate, currentPath]);
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+
+    if (userId) {
       mainApi.getProfileInfo()
         .then((userData) => {
           setCurrentUser(userData);
           handleLogin(true);
-          navigate('/movies', { replace: true });
         })
         .catch(err => {
           console.error('Ошибка при запросе к API:', err);
         });
     }
-  }, [loggedIn]);
+  }, []);
 
   const handleLogin = (status) => {
     localStorage.setItem('loggedIn', loggedIn);
@@ -98,12 +108,8 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="signup" element={<Register handleLogin={handleLogin} />} />
             <Route path="signin" element={<Login handleLogin={handleLogin} />} />
-            <Route path="movies" element={<ProtectedRouteElement
-              element={Movies}
-            />} />
-            <Route path="saved-movies" element={<ProtectedRouteElement
-              element={SavedMovies}
-            />} />
+            <Route path="movies" element={<ProtectedRouteElement element={Movies} />} />
+            <Route path="saved-movies" element={<ProtectedRouteElement element={SavedMovies} />} />
             <Route path="profile" element={<ProtectedRouteElement
               element={Profile}
               handleLogin={handleLogin}
