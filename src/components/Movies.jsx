@@ -43,16 +43,14 @@ function Movies() {
   }, [isInitialSubmitted]);
 
   useEffect(() => {
-    if (isSubmitted) {
-      mainApi.getLikedMovies()
-        .then((data) => {
-          setLikedMovies(data.map((movie) => movie.movieId));
-        })
-        .catch((err) => {
-          console.log("Ошибка при запросе сохранённых фильмов", err);
-        });
-    }
-  }, [isSubmitted]);
+    mainApi.getLikedMovies()
+      .then((data) => {
+        setLikedMovies(data.map((movie) => movie.movieId));
+      })
+      .catch((err) => {
+        console.log("Ошибка при запросе сохранённых фильмов", err);
+      });
+  }, []);
 
   useEffect(() => {
     if (isSubmitted) {

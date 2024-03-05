@@ -14,7 +14,7 @@ function Profile(props) {
     const isNameChanged = values.name !== currentUser.name;
     const isEmailChanged = values.email !== currentUser.email;
 
-    setIsFormChanged(isNameChanged || isEmailChanged);
+    setIsFormChanged(isNameChanged && isEmailChanged);
   }, [values, currentUser]);
 
   const handleEditClick = () => {
@@ -49,12 +49,11 @@ function Profile(props) {
               id="name"
               name="name"
               type="text"
-              value={values.name || ''}
+              value={values.name || currentUser.name}
               onChange={handleChange}
               className={`auth__input profile__input ${errors.name ? 'auth__input_error' : ''}`}
               maxLength="30"
               minLength="2"
-              placeholder={currentUser.name}
               required
               disabled={!props.isEditing} // Делаем поле неактивным при просмотре
             />
@@ -68,11 +67,10 @@ function Profile(props) {
               id="email"
               name="email"
               type="email"
-              value={values.email || ''}
+              value={values.email || currentUser.email}
               onChange={handleChange}
               className={`auth__input profile__input ${errors.email ? 'auth__input_error' : ''}`}
               maxLength="35"
-              placeholder={currentUser.email}
               pattern='[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}'
               required
               disabled={!props.isEditing} // Делаем поле неактивным при просмотре

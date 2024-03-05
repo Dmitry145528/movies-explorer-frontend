@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import mainApi from '../utils/MainApi';
 
-function MoviesCard({ movie, likedMovies, setUpdate }) {
+function MoviesCard({ movie, likedMovies, onDelete }) {
 
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState(location.pathname);
@@ -26,6 +26,8 @@ function MoviesCard({ movie, likedMovies, setUpdate }) {
 
     return formattedDuration.trim(); // Убираем лишние пробелы
   };
+
+  console.log(likedMovies);
 
   const handleCardLike = () => {
 
@@ -55,9 +57,7 @@ function MoviesCard({ movie, likedMovies, setUpdate }) {
       mainApi.deleteMovie(movieData.movieId)
         .then(() => {
           setIsLiked(false);
-          if (currentPath === '/saved-movies') {
-            setUpdate(true);
-          }
+          onDelete(movieData.movieId);
         })
         .catch((err) => console.error('Ошибка при удалении фильма:', err));
     }

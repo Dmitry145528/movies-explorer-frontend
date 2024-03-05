@@ -14,11 +14,9 @@ function SavedMovies() {
   const [prevResult, setPrevResult] = useState([]);
   const [shortFilm, setShortFilm] = useState(false);
   const [error, setError] = useState('');
-  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    setError(null);
-    if (!update) {
+      setError(null);
       mainApi.getLikedMovies()
         .then((data) => {
           setLikedMovies(data.map((movie) => movie));
@@ -28,9 +26,17 @@ function SavedMovies() {
         .catch((err) => {
           console.log("Ошибка при запросе сохранённых фильмов", err);
         })
-    }
-    setUpdate(false);
-  }, [update]);
+  }, []);
+
+  const handleCardDelete = (deletedMovieId) => {
+    // Обновляем состояния, исключив удаленный фильм
+    const updatedLikedMovies = likedMovies.filter((movie) => movie.movieId !== deletedMovieId);
+    const updatedPrevResult = prevResult.filter((movie) => movie.movieId !== deletedMovieId);
+    const updatedMovies = movies.filter((movie) => movie.movieId !== deletedMovieId);
+    setLikedMovies(updatedLikedMovies);
+    setPrevResult(updatedPrevResult);
+    setMovies(updatedMovies);
+  };
 
   useEffect(() => {
     if (isSubmitted) {
@@ -93,8 +99,7 @@ function SavedMovies() {
               key={movie.movieId}
               movie={movie}
               likedMovies={likedMovies}
-              setUpdate={setUpdate}
-              setLikedMovies={setLikedMovies}
+              onDelete={handleCardDelete}
             />
           ))}
         />
