@@ -1,4 +1,4 @@
-import ArrowLink from '../images/arrow-link.svg'
+import ArrowLink from '../images/arrow-link.svg';
 
 function Portfolio() {
   return (
@@ -18,4 +18,4 @@ function Portfolio() {
   )
 }
 
-export default Portfolio
+export default Portfolio;

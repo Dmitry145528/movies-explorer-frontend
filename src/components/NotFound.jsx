@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { ENDPOINT_MAIN } from '../utils/constans';
 
 function NotFound() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function NotFound() {
       navigate(-1);
     } else {
       // Если нет предыдущей страницы, перейти на главную страницу
-      navigate('/');
+      navigate(ENDPOINT_MAIN);
     }
   };
   

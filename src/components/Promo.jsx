@@ -1,4 +1,4 @@
-import LogoPromo from '../images/image-promo.svg'
+import LogoPromo from '../images/image-promo.svg';
 
 function Promo() {
   return (
@@ -11,4 +11,4 @@ function Promo() {
   )
 }
 
-export default Promo
+export default Promo;

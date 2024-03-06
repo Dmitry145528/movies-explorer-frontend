@@ -3,6 +3,7 @@ import MoviesCardList from './MoviesCardList';
 import MoviesCard from './MoviesCard';
 import { useState, useEffect } from 'react';
 import mainApi from '../utils/MainApi';
+import NOT_FOUND_MESSAGE from '../utils/constans';
 
 function SavedMovies() {
 
@@ -98,7 +99,7 @@ function SavedMovies() {
       />
       {error && <p className="not-found__text not-found__result">{error}</p>}
       {!error && likedMovies.length === 0 && isInitialSubmitted && (
-        <p className="not-found__text not-found__result">По вашему запросу ничего не найдено!</p>
+        <p className="not-found__text not-found__result">{NOT_FOUND_MESSAGE}</p>
       )}
       {!error && likedMovies.length > 0 && (
         <MoviesCardList

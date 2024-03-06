@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import * as Auth from "../utils/Auth"
 import mainApi from "../utils/MainApi";
+import {
+  ENDPOINT_SIGNIN,
+  ENDPOINT_MOVIES,
+  HTTP_STATUS_CONFLICT
+} from '../utils/constans';
 
 function Register(props) {
 
@@ -22,13 +27,13 @@ function Register(props) {
               if (res) {
                 props.handleLogin(true);
                 setError('');
-                navigate('/movies', { replace: true });
+                navigate(ENDPOINT_MOVIES, { replace: true });
               }
             })
           }
         })
         .catch((err) => {
-          setError(err.status === 409 ? err.error.message : 'При регистрации пользователя произошла ошибка.');
+          setError(err.status === HTTP_STATUS_CONFLICT ? err.error.message : 'При регистрации пользователя произошла ошибка.');
           console.error('Ошибка при запросе регистрации:', err.error.message);
         })
         .finally(() => {
@@ -43,11 +48,11 @@ function Register(props) {
       onSubmit={handleSubmit}
       buttonText="Зарегистрироваться"
       linkText="Уже зарегистрированы?"
-      linkTo="/signin"
+      linkTo={ENDPOINT_SIGNIN}
       error={error}
       isSubmitting={isSubmitting}
     />
   );
 }
 
-export default Register
+export default Register;

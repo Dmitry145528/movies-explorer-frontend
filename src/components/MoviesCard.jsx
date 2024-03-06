@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import mainApi from '../utils/MainApi';
+import { ENDPOINT_MOVIES } from '../utils/constans';
 
 function MoviesCard({ movie, likedMovies, onDelete }) {
 
@@ -68,7 +69,7 @@ function MoviesCard({ movie, likedMovies, onDelete }) {
       </a>
       <div className="element__pos-element">
         <h2 className="element__title">{movie.nameRU}</h2>
-        <button className={currentPath === '/movies' ? `element__heart ${isLiked ? "element__heart_active" : ""}` : "element__heart element__delete"} onClick={handleCardLike}></button>
+        <button className={currentPath === ENDPOINT_MOVIES ? `element__heart ${isLiked ? "element__heart_active" : ""}` : "element__heart element__delete"} onClick={handleCardLike}></button>
       </div>
       <p className="element__duration">{formatDuration(movie.duration)}</p>
     </li>

@@ -2,6 +2,14 @@ import { Link, useLocation } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react';
 import LoggedInStatusContext  from '../contexts/LoggedInStatusContext'
 import Logo from '../images/logo.svg'
+import {
+  ENDPOINT_SIGNUP,
+  ENDPOINT_SIGNIN,
+  ENDPOINT_MOVIES,
+  ENDPOINT_SAVED_MOVIES,
+  ENDPOINT_PROFILE,
+  ENDPOINT_MAIN
+} from '../utils/constans';
 
 function Header() {
   const loggedIn = useContext(LoggedInStatusContext);
@@ -21,32 +29,32 @@ function Header() {
   return (
     <>
       <header className="header">
-        <Link className="header__logo" to="/">
+        <Link className="header__logo" to={ENDPOINT_MAIN}>
           <img src={Logo} alt="Логотип в виде улыбающегося смайлика" />
         </Link>
         {loggedIn === true ? (
           <>
             <nav className="header__container">
               <ul className='header__list header__list_auth'>
-                <li><Link className={`header__link header__link_auth ${currentPath === '/movies' ? 'header__link_active' : ''}`} to="/movies">Фильмы</Link></li>
-                <li><Link className={`header__link header__link_auth ${currentPath === '/saved-movies' ? 'header__link_active' : ''}`} to="/saved-movies">Сохранённые фильмы</Link></li>
+                <li><Link className={`header__link header__link_auth ${currentPath === ENDPOINT_MOVIES ? 'header__link_active' : ''}`} to={ENDPOINT_MOVIES}>Фильмы</Link></li>
+                <li><Link className={`header__link header__link_auth ${currentPath === ENDPOINT_SAVED_MOVIES ? 'header__link_active' : ''}`} to={ENDPOINT_SAVED_MOVIES}>Сохранённые фильмы</Link></li>
               </ul>
-              <Link className={currentPath === '/' ? 'header__link_img' : 'header__link_img header__link_img_dark'} to="/profile"></Link>
+              <Link className={currentPath === ENDPOINT_MAIN ? 'header__link_img' : 'header__link_img header__link_img_dark'} to={ENDPOINT_PROFILE}></Link>
             </nav>
             <nav className={isBurgerMenuOpen ? "header__container_mobile header__container_mobile-open" : "header__container_mobile"}>
               <ul className='header__list header__list_auth-mobile'>
-                <li><Link className={`header__link header__link_auth ${currentPath === '/' ? 'header__link_active' : ''}`} to="/">Главная</Link></li>
-                <li><Link className={`header__link header__link_auth ${currentPath === '/movies' ? 'header__link_active' : ''}`} to="/movies">Фильмы</Link></li>
-                <li><Link className={`header__link header__link_auth ${currentPath === '/saved-movies' ? 'header__link_active' : ''}`} to="/saved-movies">Сохранённые фильмы</Link></li>
+                <li><Link className={`header__link header__link_auth ${currentPath === ENDPOINT_MAIN ? 'header__link_active' : ''}`} to={ENDPOINT_MAIN}>Главная</Link></li>
+                <li><Link className={`header__link header__link_auth ${currentPath === ENDPOINT_MOVIES ? 'header__link_active' : ''}`} to={ENDPOINT_MOVIES}>Фильмы</Link></li>
+                <li><Link className={`header__link header__link_auth ${currentPath === ENDPOINT_SAVED_MOVIES ? 'header__link_active' : ''}`} to={ENDPOINT_SAVED_MOVIES}>Сохранённые фильмы</Link></li>
               </ul>
-              <Link className={currentPath === '/' ? 'header__link_img' : 'header__link_img header__link_img_dark'} to="/profile"></Link>
+              <Link className={currentPath === ENDPOINT_MAIN ? 'header__link_img' : 'header__link_img header__link_img_dark'} to={ENDPOINT_PROFILE}></Link>
             </nav>
             <button className={isBurgerMenuOpen ? "header__button_mobile-close rotateClockwise" : "header__button_mobile "} onClick={handleBurgerClick}></button>
           </>
         ) : (
           <ul className='header__list'>
-            <li><Link className='header__link' to="/signup">Регистрация</Link></li>
-            <li><Link className='header__link header__button' to="/signin">Войти</Link></li>
+            <li><Link className='header__link' to={ENDPOINT_SIGNUP}>Регистрация</Link></li>
+            <li><Link className='header__link header__button' to={ENDPOINT_SIGNIN}>Войти</Link></li>
           </ul>
         )}
       </header>
@@ -54,4 +62,4 @@ function Header() {
   );
 }
 
-export default Header
+export default Header;

@@ -5,6 +5,21 @@ import Preloader from './Preloader';
 import { useState, useEffect } from 'react';
 import moviesApi from '../utils/MoviesApi';
 import mainApi from '../utils/MainApi';
+import {
+  NOT_FOUND_MESSAGE,
+  ERROR_MESSAGE,
+  MAX_MOVIES_1199,
+  MAX_MOVIES_930,
+  MAX_MOVIES_590,
+  MAX_MOVIES,
+  MAX_MOVIES_STEP_1199,
+  MAX_MOVIES_STEP_930,
+  MAX_MOVIES_STEP,
+  MAX_WIDTH_1199,
+  MAX_WIDTH_930,
+  MAX_WIDTH_590,
+  MAX_SHORTS_DURATION
+} from '../utils/constans';
 
 function Movies() {
 
@@ -50,7 +65,7 @@ function Movies() {
             })
             .catch((error) => {
               console.error('Ошибка при запросе к API:', error);
-              setError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+              setError(ERROR_MESSAGE);
             })
             .finally(() => {
               setLoading(false);
@@ -139,7 +154,7 @@ function Movies() {
   // Фильтрация короткометражек
   function filterShortMovies(movies, shortFilm) {
     const filteredShortMovies = shortFilm
-      ? movies.filter(movie => movie.duration && movie.duration <= 40)
+      ? movies.filter(movie => movie.duration && movie.duration <= MAX_SHORTS_DURATION)
       : prevResult;
 
     return filteredShortMovies;
@@ -147,27 +162,27 @@ function Movies() {
 
   function getVisibleMovies() {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 1199) {
-      return 16;
-    } else if (screenWidth >= 930) {
-      return 12;
-    } else if (screenWidth >= 590) {
-      return 8;
+    if (screenWidth > MAX_WIDTH_1199) {
+      return MAX_MOVIES_1199;
+    } else if (screenWidth >= MAX_WIDTH_930) {
+      return MAX_MOVIES_930;
+    } else if (screenWidth >= MAX_WIDTH_590) {
+      return MAX_MOVIES_590;
     } else {
-      return 5;
+      return MAX_MOVIES;
     }
   }
 
   function getCardsToAdd() {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 1199) {
-      return 4;
-    } else if (screenWidth >= 930) {
-      return 3;
-    } else if (screenWidth >= 590 && screenWidth <= 929) {
-      return 2;
+    if (screenWidth > MAX_WIDTH_1199) {
+      return MAX_MOVIES_STEP_1199;
+    } else if (screenWidth >= MAX_WIDTH_930) {
+      return MAX_MOVIES_STEP_930;
+    } else if (screenWidth >= MAX_WIDTH_590 && screenWidth <= 929) {
+      return MAX_MOVIES_STEP;
     } else {
-      return 2;
+      return MAX_MOVIES_STEP;
     }
   }
 
@@ -189,7 +204,7 @@ function Movies() {
       {loading && !error && <Preloader />}
       {error && <p className="not-found__text not-found__result">{error}</p>}
       {!loading && !error && movies.length === 0 && isInitialSubmitted && (
-        <p className="not-found__text not-found__result">По вашему запросу ничего не найдено!</p>
+        <p className="not-found__text not-found__result">{NOT_FOUND_MESSAGE}</p>
       )}
       {!loading && !error && movies.length > 0 && (
         <MoviesCardList

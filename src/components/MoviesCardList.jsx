@@ -8,4 +8,4 @@ function MoviesCardList({ movieItems }) {
   )
 }
 
-export default MoviesCardList
+export default MoviesCardList;

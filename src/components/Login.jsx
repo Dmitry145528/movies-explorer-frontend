@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import * as Auth from "../utils/Auth"
 import mainApi from "../utils/MainApi";
+import {
+  ENDPOINT_SIGNUP,
+  ENDPOINT_MOVIES,
+  HTTP_STATUS_UNAUTHORIZED,
+} from '../utils/constans';
 
 function Login(props) {
 
@@ -22,13 +27,13 @@ function Login(props) {
               if (res) {
                 props.handleLogin(true);
                 setError('');
-                navigate('/movies', { replace: true });
+                navigate(ENDPOINT_MOVIES, { replace: true });
               }
             })
           }
         })
         .catch(err => {
-          setError(err.status === 401 ? err.error.message : 'При авторизации произошла ошибка.');
+          setError(err.status === HTTP_STATUS_UNAUTHORIZED ? err.error.message : 'При авторизации произошла ошибка.');
           console.error('Ошибка при запросе авторизации:', err.error.message);
         })
         .finally(() => {
@@ -43,7 +48,7 @@ function Login(props) {
       onSubmit={handleSubmit}
       buttonText="Войти"
       linkText="Ещё не зарегистрированы?"
-      linkTo="/signup"
+      linkTo={ENDPOINT_SIGNUP}
       error={error}
       isSubmitting={isSubmitting}
     />

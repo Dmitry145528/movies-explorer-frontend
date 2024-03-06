@@ -14,6 +14,15 @@ import ProtectedRouteElement from './ProtectedRouteElement';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import LoggedInStatusContext from '../contexts/LoggedInStatusContext';
 import { onLogout } from '../utils/Auth';
+import {
+  HTTP_STATUS_CONFLICT,
+  ENDPOINT_SIGNUP,
+  ENDPOINT_SIGNIN,
+  ENDPOINT_MOVIES,
+  ENDPOINT_SAVED_MOVIES,
+  ENDPOINT_PROFILE,
+  ENDPOINT_MAIN
+} from '../utils/constans';
 
 function App() {
 
@@ -37,7 +46,7 @@ function App() {
 
     if (userId) {
 
-      if (currentPath.endsWith('/signup') || currentPath.endsWith('/signin')) {
+      if (currentPath.endsWith(ENDPOINT_SIGNUP) || currentPath.endsWith(ENDPOINT_SIGNIN)) {
         navigate(navigate(-1), { replace: true });
         return;
       }
@@ -77,7 +86,7 @@ function App() {
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('movies');
         handleLogin(false);
-        navigate('/', { replace: true });
+        navigate(ENDPOINT_MAIN, { replace: true });
       }
     })
       .catch(err => {
@@ -96,7 +105,7 @@ function App() {
           setError('');
         })
         .catch((err) => {
-          setError(err.status === 409 ? err.error.message : 'При обновлении профиля произошла ошибка.');
+          setError(err.status === HTTP_STATUS_CONFLICT ? err.error.message : 'При обновлении профиля произошла ошибка.');
           setIsEditing(true);
           console.error(err.error.message);
         })
@@ -110,14 +119,14 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <LoggedInStatusContext.Provider value={loggedIn}>
         <div className="center-pos">
-          {(currentPath === '/' || currentPath === '/profile' || currentPath === '/movies' || currentPath === '/saved-movies') && <Header />}
+          {(currentPath === ENDPOINT_MAIN || currentPath === ENDPOINT_PROFILE || currentPath === ENDPOINT_MOVIES || currentPath === ENDPOINT_SAVED_MOVIES) && <Header />}
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="signup" element={<Register handleLogin={handleLogin} />} />
-            <Route path="signin" element={<Login handleLogin={handleLogin} />} />
-            <Route path="movies" element={<ProtectedRouteElement element={Movies} />} />
-            <Route path="saved-movies" element={<ProtectedRouteElement element={SavedMovies} />} />
-            <Route path="profile" element={<ProtectedRouteElement
+            <Route path={ENDPOINT_MAIN} element={<Main />} />
+            <Route path={ENDPOINT_SIGNUP} element={<Register handleLogin={handleLogin} />} />
+            <Route path={ENDPOINT_SIGNIN} element={<Login handleLogin={handleLogin} />} />
+            <Route path={ENDPOINT_MOVIES} element={<ProtectedRouteElement element={Movies} />} />
+            <Route path={ENDPOINT_SAVED_MOVIES} element={<ProtectedRouteElement element={SavedMovies} />} />
+            <Route path={ENDPOINT_PROFILE} element={<ProtectedRouteElement
               element={Profile}
               handleLogin={handleLogin}
               onSignOut={onSignOut}
@@ -131,7 +140,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
 
-          {(currentPath === '/' || currentPath === '/movies' || currentPath === '/saved-movies') && <Footer />}
+          {(currentPath === ENDPOINT_MAIN || currentPath === ENDPOINT_MOVIES || currentPath === ENDPOINT_SAVED_MOVIES) && <Footer />}
         </div>
       </LoggedInStatusContext.Provider>
     </CurrentUserContext.Provider>

@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import CurrentUserContext from '../contexts/CurrentUserContext';
+import PATTERN_EMAIL from '../utils/constans';
 
 function Profile({ onUpdateUser, editProfile, isSubmitting, isEditing, error, onSignOut }) {
 
@@ -76,7 +77,7 @@ function Profile({ onUpdateUser, editProfile, isSubmitting, isEditing, error, on
               onChange={handleChange}
               className={`auth__input profile__input ${errors.email ? 'auth__input_error' : ''}`}
               maxLength="35"
-              pattern='[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}'
+              pattern={PATTERN_EMAIL}
               required
               disabled={!isEditing} // Делаем поле неактивным при просмотре
             />
