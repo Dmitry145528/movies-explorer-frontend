@@ -1,4 +1,9 @@
-import BASE_URL from './constans';
+import {
+  BASE_URL,
+  ENDPOINT_SIGNUP,
+  ENDPOINT_SIGNIN,
+  ENDPOINT_SIGNOUT
+} from './constans';
 
 const checkResponse = (res) => {
   if (res.ok) {
@@ -15,7 +20,7 @@ const request = (url, options) => {
 }
 
 const register = (password, email, name) => {
-  return request(`${BASE_URL}/signup`, {
+  return request(`${BASE_URL}${ENDPOINT_SIGNUP}`, {
     method: 'POST',
     credentials: "include",
     headers: {
@@ -34,7 +39,7 @@ const register = (password, email, name) => {
 }
 
 const onLogin = (password, email) => {
-  return request(`${BASE_URL}/signin`, {
+  return request(`${BASE_URL}${ENDPOINT_SIGNIN}`, {
     method: 'POST',
     credentials: "include",
     headers: {
@@ -53,7 +58,7 @@ const onLogin = (password, email) => {
 }
 
 const onLogout = () => {
-  return request(`${BASE_URL}/signout`, {
+  return request(`${BASE_URL}${ENDPOINT_SIGNOUT}`, {
     method: 'POST',
     credentials: "include",
     headers: {
@@ -62,4 +67,4 @@ const onLogout = () => {
   });
 }
 
-export { BASE_URL, register, onLogin, onLogout }
+export { register, onLogin, onLogout };

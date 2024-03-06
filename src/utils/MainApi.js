@@ -1,4 +1,8 @@
-import BASE_URL from './constans';
+import {
+  BASE_URL,
+  ENDPOINT_MOVIES,
+  ENDPOINT_USERS_ME
+} from './constans';
 
 class MainApi {
   constructor({ url, headers }) {
@@ -21,14 +25,14 @@ class MainApi {
   }
 
   getProfileInfo() {
-    return this.request(`${this._url}/users/me`, {
+    return this.request(`${this._url}${ENDPOINT_USERS_ME}`, {
       credentials: "include",
       headers: this._headers
     });
   }
 
   setProfileInfo({ name, email }) {
-    return this.request(`${this._url}/users/me`, {
+    return this.request(`${this._url}${ENDPOINT_USERS_ME}`, {
       credentials: "include",
       method: 'PATCH',
       headers: this._headers,
@@ -37,7 +41,7 @@ class MainApi {
   }
 
   addMovie(movieData) {
-    return this.request(`${this._url}/movies`, {
+    return this.request(`${this._url}${ENDPOINT_MOVIES}`, {
       credentials: "include",
       headers: this._headers,
       method: 'POST',
@@ -46,7 +50,7 @@ class MainApi {
   }
 
   deleteMovie(id) {
-    return this.request(`${this._url}/movies/${id}`, {
+    return this.request(`${this._url}${ENDPOINT_MOVIES}/${id}`, {
       credentials: "include",
       headers: this._headers,
       method: 'DELETE',
@@ -54,7 +58,7 @@ class MainApi {
   }
 
   getLikedMovies() {
-    return this.request(`${this._url}/movies`, {
+    return this.request(`${this._url}${ENDPOINT_MOVIES}`, {
       credentials: "include",
       headers: this._headers
     });

@@ -6,9 +6,11 @@ export const PATTERN_EMAIL = '[a-zA-Z0-9.]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}';
 export const ENDPOINT_MAIN = '/';
 export const ENDPOINT_SIGNUP = '/signup';
 export const ENDPOINT_SIGNIN = '/signin';
+export const ENDPOINT_SIGNOUT = '/signout';
 export const ENDPOINT_MOVIES = '/movies';
 export const ENDPOINT_SAVED_MOVIES = '/saved-movies';
 export const ENDPOINT_PROFILE = '/profile';
+export const ENDPOINT_USERS_ME = '/users/me';
 
 export const HTTP_STATUS_CONFLICT = 409;
 export const HTTP_STATUS_UNAUTHORIZED = 401;

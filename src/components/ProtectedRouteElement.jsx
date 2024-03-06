@@ -1,8 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useContext } from 'react';
 import LoggedInStatusContext from '../contexts/LoggedInStatusContext';
-import ENDPOINT_SIGNIN from '../utils/constans';
-
+import { ENDPOINT_SIGNIN } from '../utils/constans';
 
 const ProtectedRouteElement = ({ element: Component, ...props }) => {
   

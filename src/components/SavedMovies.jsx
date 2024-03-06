@@ -3,7 +3,7 @@ import MoviesCardList from './MoviesCardList';
 import MoviesCard from './MoviesCard';
 import { useState, useEffect } from 'react';
 import mainApi from '../utils/MainApi';
-import NOT_FOUND_MESSAGE from '../utils/constans';
+import { NOT_FOUND_MESSAGE } from '../utils/constans';
 
 function SavedMovies() {
 

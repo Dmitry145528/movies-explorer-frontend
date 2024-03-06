@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import CurrentUserContext from '../contexts/CurrentUserContext';
-import PATTERN_EMAIL from '../utils/constans';
+import { PATTERN_EMAIL } from '../utils/constans';
 
 function Profile({ onUpdateUser, editProfile, isSubmitting, isEditing, error, onSignOut }) {
 
