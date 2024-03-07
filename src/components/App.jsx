@@ -47,7 +47,7 @@ function App() {
     if (userId) {
 
       if (currentPath.endsWith(ENDPOINT_SIGNUP) || currentPath.endsWith(ENDPOINT_SIGNIN)) {
-        navigate(navigate(-1), { replace: true });
+        navigate(ENDPOINT_MOVIES, { replace: true });
         return;
       }
     }
@@ -66,7 +66,7 @@ function App() {
           console.error('Ошибка при запросе к API:', err);
         });
     }
-  }, []);
+  }, [loggedInStorage]);
 
   const handleLogin = (status) => {
     localStorage.setItem('loggedIn', status);

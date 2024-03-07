@@ -20,7 +20,7 @@ function Profile({ onUpdateUser, editProfile, isSubmitting, isEditing, error, on
     const isNameChanged = values.name !== currentUser.name;
     const isEmailChanged = values.email !== currentUser.email;
 
-    setIsFormChanged(isNameChanged && isEmailChanged);
+    setIsFormChanged(isNameChanged || isEmailChanged);
   }, [values]);
 
   const handleEditClick = () => {
