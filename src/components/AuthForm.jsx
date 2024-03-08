@@ -2,8 +2,14 @@ import Logo from '../images/logo.svg'
 import { useLocation, Link } from "react-router-dom"
 import { useFormAndValidation } from "../hooks/useFormAndValidation"
 import { useState, useEffect } from "react"
+import {
+  PATTERN_EMAIL,
+  ENDPOINT_SIGNUP,
+  ENDPOINT_SIGNIN,
+  ENDPOINT_MAIN
+} from '../utils/constans';
 
-function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
+function AuthForm({ title, onSubmit, buttonText, linkText, linkTo, error, isSubmitting }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
   const location = useLocation();
@@ -16,7 +22,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isValid) {
+    if (!isSubmitting && isValid) {
       onSubmit(values);
     } else {
       console.log('Форма невалидна, отправка данных отклонена.');
@@ -31,14 +37,14 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
   return (
     <main className="auth">
       <div className="auth__header">
-        <Link className="auth__header_logo header__logo" to="/">
+        <Link className="auth__header_logo header__logo" to={ENDPOINT_MAIN}>
           <img src={Logo} alt="Логотип в виде улыбающегося смайлика" />
         </Link>
         <h1 className="auth__header_title">{title}</h1>
       </div>
       <form className="auth__form" onSubmit={handleSubmit}>
         <fieldset className="auth__contact-info">
-          {currentPath === "/signup" ? (
+          {currentPath === ENDPOINT_SIGNUP ? (
             <div className="auth__field">
               <label htmlFor="name" className="auth__label">
                 Имя
@@ -71,6 +77,7 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
               className={`auth__input ${errors.email ? 'auth__input_error' : ''}`}
               maxLength="37"
               placeholder="Введите E-mail"
+              pattern={PATTERN_EMAIL}
               required
             />
             <span className="auth__input-error">{errors.email}</span>
@@ -93,14 +100,14 @@ function AuthForm({ title, onSubmit, buttonText, linkText, linkTo }) {
             <span className="auth__input-error">{errors.password}</span>
           </div>
         </fieldset>
-        <p className="auth__enter-error">Тут будут располагаться сетевые ошибки</p>
-        <button className={`auth__button ${currentPath === '/signin' ? 'auth__button_log' : 'auth__button_reg'} ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью ${buttonText}`} disabled={!isValid}>
+        <p className="auth__enter-error">{error}</p>
+        <button className={`auth__button ${currentPath === ENDPOINT_SIGNIN ? 'auth__button_log' : 'auth__button_reg'} ${isValid ? '' : 'auth__button_disabled'}`} aria-label={`Кнопка с надписью ${buttonText}`} disabled={!isValid}>
           {buttonText}
         </button>
       </form>
       {linkText && (
         <p className="auth__caption">
-          {linkText} <Link className="auth__caption-link" to={linkTo}>{currentPath === "/signup" ? ('Войти') : ('Регистрация')
+          {linkText} <Link className="auth__caption-link" to={linkTo}>{currentPath === ENDPOINT_SIGNUP ? ('Войти') : ('Регистрация')
           }</Link>
         </p>
       )}

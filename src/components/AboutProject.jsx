@@ -18,4 +18,4 @@ function AboutProject() {
   )
 }
 
-export default AboutProject
+export default AboutProject;

@@ -1,0 +1,23 @@
+.element {
+  max-width: 270px;
+  width: 100%;
+  justify-self: center;
+}
+
+@media screen and (min-width: 930px) {
+  .element:hover .element__heart{
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .element {
+    max-width: 339px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .element {
+    max-width: 300px;
+  }
+}

@@ -1,23 +1,32 @@
-import SearchIcon from '../images/search-icon.svg'
+import SearchIcon from '../images/search-icon.svg';
 import FilterCheckBox from "./FilterCheckbox";
-import { useFormAndValidation } from "../hooks/useFormAndValidation"
 
-function SearchForm() {
+function SearchForm({ setIsSubmitted, onChange, value, setIsInitialSubmitted, shortFilm, setShortFilm, isSubmitting }) {
 
-  const { values, handleChange } = useFormAndValidation();
+  const handleCheckboxChange = () => {
+    setShortFilm(!shortFilm);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!isSubmitting){
+    setIsSubmitted(true);
+    setIsInitialSubmitted(true);
+    }
+  }
 
   return (
     <section className="search">
       <div className="search__container">
         <img src={SearchIcon} alt="Иконка поиска" className="search__icon" />
-        <form className="search__form">
+        <form className="search__form" onSubmit={handleSubmit}>
           <fieldset className="search__fieldset">
             <input
-              id="name"
-              name="name"
+              id="search"
+              name="search"
               type="text"
-              value={values.name}
-              onChange={handleChange}
+              value={value}
+              onChange={onChange}
               className='search__input'
               placeholder="Фильм"
             />
@@ -28,14 +37,20 @@ function SearchForm() {
         </form>
         <span className="search__line"></span>
         <div className="search__filter">
-          <FilterCheckBox />
+          <FilterCheckBox
+            handleCheckboxChange={handleCheckboxChange}
+            shortFilm={shortFilm}
+          />
         </div>
       </div>
       <div className="search__filter_mobile">
-        <FilterCheckBox />
+        <FilterCheckBox
+        handleCheckboxChange={handleCheckboxChange}
+        shortFilm={shortFilm}
+        />
       </div>
     </section>
   )
 }
 
-export default SearchForm
+export default SearchForm;
