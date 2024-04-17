@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.project-movies.nomoredomainswork.ru';
+export const BASE_URL = '176.123.165.95';
 export const BEATFILM_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 export const PATTERN_EMAIL = '[a-zA-Z0-9.]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}';
