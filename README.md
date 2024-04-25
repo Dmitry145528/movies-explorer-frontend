@@ -1,6 +1,6 @@
 # Дипломный проект: Movies Explorer (React) от _"Yandex Practicum"_.
 
-Дипломный проект "Movies Explorer" представляет собой веб-приложение, созданное с использованием React, которое позволяет пользователям открывать увлекательный мир кино. С приложением вы можете легко находить информацию о различных фильмах, исследовать новые кинематографические шедевры и сохранять свои любимые фильмы для последующего просмотра. [Ссылка на макет в Figma(dark-1)](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82?type=design&node-id=1-6015&mode=design&t=QrcqYAWl02BAIGYW-0)
+Дипломный проект "Movies Explorer" представляет собой веб-приложение, созданное с использованием React, которое позволяет пользователям открывать увлекательный мир кино. С приложением вы можете легко находить информацию о различных фильмах, исследовать новые кинематографические шедевры и сохранять свои любимые фильмы для последующего просмотра. [Ссылка на макет в Figma(dark-1)](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82?type=design&node-id=1-6015&mode=design&t=QrcqYAWl02BAIGYW-0) | [Ссылка на сайт](https://project-movies.nomoredomainswork.ru/#/)
 
 <img src="./src/images/Screen.png">
 
